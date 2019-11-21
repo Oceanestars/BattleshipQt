@@ -6,6 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+//    connect(menu_,&QAbstractButton::clicked,this,slot);
+    menu_= new RulesWindow();
+    menu_->show();
+    this->hide();
 }
 
 MainWindow::~MainWindow()

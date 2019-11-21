@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include "ruleswindow.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -19,5 +19,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    RulesWindow *menu_;
+
 };
 #endif // MAINWINDOW_H
