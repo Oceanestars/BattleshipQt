@@ -12,3 +12,12 @@ RulesWindow::~RulesWindow()
 {
     delete ui;
 }
+
+void RulesWindow::on_two_player_clicked()
+{
+
+    this->hide();
+    emit StartGame();
+
+
+}
