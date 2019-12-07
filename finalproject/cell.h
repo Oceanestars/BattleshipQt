@@ -43,7 +43,9 @@ public:
     void set_next_status(bool next_turn_status_){next_turn_status=next_turn_status_;}
     void set_color(QColor color){
         color_=color;
+
     }
+    static int clicked_button;
 
 signals:
     void increase();
@@ -64,5 +66,6 @@ protected:
   void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 
 };
+
 
 #endif // CELL_H

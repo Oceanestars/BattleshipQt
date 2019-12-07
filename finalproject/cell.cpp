@@ -32,7 +32,7 @@ Cell::Cell(int x, int y, int width, int height){
     width_ = width;
     height_ = height;
 }
-
+int Cell::clicked_button=0;
 /**
  * Draws the outline for the cells so that we can contain our cells within a square.
  * @param nothing
@@ -80,12 +80,14 @@ void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     //shift
+    //qDebug()<<clicked_button;
+    if(Cell::clicked_button>0){
+        qDebug()<<Cell::clicked_button;
     if(event->modifiers() == Qt::ShiftModifier)
     {
         int x = this->get_x()/30;
         int y = this->get_y()/30;
-//        qDebug( "x");
-//        qDebug("y");
+
         return;
 
     }
@@ -94,9 +96,12 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if(this->get_color() == QColor(255, 255, 255)){
 
             this->set_color(QColor(242,19,131));
-
+            //Cell::clicked_button--;
         }
+
     }
     update();
+    qDebug()<<"Hello";
+     Cell::clicked_button--;
 }
-
+}

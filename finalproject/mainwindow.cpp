@@ -74,3 +74,19 @@ MainWindow::~MainWindow()
 }
 
 
+
+void MainWindow::on_pushButton_clicked()
+{
+
+    Cell::clicked_button=2;
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    Cell::clicked_button=3;
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    Cell::clicked_button=5;
+}
