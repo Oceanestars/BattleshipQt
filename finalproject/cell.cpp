@@ -79,5 +79,24 @@ void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
  */
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    //shift
+    if(event->modifiers() == Qt::ShiftModifier)
+    {
+        int x = this->get_x()/30;
+        int y = this->get_y()/30;
+//        qDebug( "x");
+//        qDebug("y");
+        return;
 
+    }
+
+    if(event->button() == Qt::LeftButton){
+        if(this->get_color() == QColor(255, 255, 255)){
+
+            this->set_color(QColor(242,19,131));
+
+        }
+    }
+    update();
 }
+
