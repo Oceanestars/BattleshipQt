@@ -49,6 +49,7 @@ public:
     }
 
     static int clicked_button;
+    bool is_game = false;
 
 
 
