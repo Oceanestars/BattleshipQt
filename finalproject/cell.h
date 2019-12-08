@@ -43,9 +43,14 @@ public:
     void set_next_status(bool next_turn_status_){next_turn_status=next_turn_status_;}
     void set_color(QColor color){
         color_=color;
+        update();
+
 
     }
+
     static int clicked_button;
+
+
 
 signals:
     void increase();
@@ -59,12 +64,15 @@ private:
   int height_;
   bool current_status;
   bool next_turn_status;
+  bool is_hit;
+  bool is_boat;
+
 
   QColor color_;
 
 protected:
   void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-
+//is hidden and is hit is boat
 };
 
 

@@ -32,21 +32,37 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_Uboat1_clicked();
+
+    void on_Submarine1_clicked();
+
+    void on_Carrier1_clicked();
+
+    void on_Done1_clicked();
+
+    void on_Uboat2_clicked();
+
+    void on_Submarine2_clicked();
+
+    void on_Carrier2_clicked();
+
+    void on_Done2_clicked();
 
 private:
     Ui::MainWindow *ui;
     Cell * cells[10][10];
+    Cell * cells2[10][10];
     QGraphicsScene *BuildGrid_;
     QGraphicsScene *BuildGrid_2;
     int cell_height_;
     int cell_width_;
     int turn_ = 0;
-
+    void HideCell();
+    void HideCell2();
+    bool ishidden1=false;
+    bool ishidden2=false;
 
 
 };

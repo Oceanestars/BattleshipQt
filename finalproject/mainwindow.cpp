@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-//This is commented out so we can focus on the navigation problem
+
 //    Grid
     BuildGrid_ = new QGraphicsScene;
     QGraphicsView * grid_view = ui->p1_screen;
@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     grid_view->setSceneRect(0,0,grid_view->frameSize().width(),grid_view->frameSize().height());
 
     cell_height_ = grid_view->frameSize().height();
-    cell_width_ = grid_view->frameSize().width(); //no matter the number there is still a weird edge
+    cell_width_ = grid_view->frameSize().width();
 
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
@@ -57,12 +57,12 @@ MainWindow::MainWindow(QWidget *parent)
     grid_view2->setSceneRect(0,0,grid_view2->frameSize().width(),grid_view2->frameSize().height());
 
     cell_height_ = grid_view2->frameSize().height();
-    cell_width_ = grid_view2->frameSize().width(); //no matter the number there is still a weird edge
+    cell_width_ = grid_view2->frameSize().width();
 
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
             Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10);
-            cells[i][j] = item;
+            cells2[i][j] = item;
             BuildGrid_2->addItem(item);
         }
     }
@@ -73,20 +73,76 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_Uboat1_clicked()
 {
-
     Cell::clicked_button=2;
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_Submarine1_clicked()
 {
     Cell::clicked_button=3;
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_Carrier1_clicked()
 {
     Cell::clicked_button=5;
+}
+
+void MainWindow::HideCell(){
+
+    QColor color(255, 0, 0);
+    color.setRgb(0, 0, 200);
+    qDebug()<<"Hello";
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 10; j++) {
+
+            cells[i][j]->set_color(color);
+
+        }
+    }
+    update();
+
+}
+
+void MainWindow::on_Done1_clicked()
+{
+    ishidden1=true;
+    HideCell();
+}
+
+// Second Player
+void MainWindow::HideCell2(){
+
+    QColor color(255, 0, 0);
+    color.setRgb(0, 0, 200);
+    qDebug()<<"Hello";
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 10; j++) {
+            cells2[i][j]->set_color(color);
+        }
+    }
+    update();
+
+}
+
+void MainWindow::on_Uboat2_clicked()
+{
+    Cell::clicked_button=2;
+}
+
+
+void MainWindow::on_Submarine2_clicked()
+{
+    Cell::clicked_button=3;
+}
+
+void MainWindow::on_Carrier2_clicked()
+{
+    Cell::clicked_button=5;
+}
+
+void MainWindow::on_Done2_clicked()
+{
+    ishidden2=true;
+    HideCell2();
 }

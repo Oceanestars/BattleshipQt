@@ -79,6 +79,7 @@ void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
  */
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    //create another slot, if statement to figure out which mode we are in, set boat or hit boat
     //shift
     //qDebug()<<clicked_button;
     if(Cell::clicked_button>0){
@@ -97,6 +98,8 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
             this->set_color(QColor(242,19,131));
             //Cell::clicked_button--;
+            //ishidden1=true;
+            this->is_boat=true;
         }
 
     }
@@ -105,3 +108,5 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
      Cell::clicked_button--;
 }
 }
+
+
