@@ -31,6 +31,13 @@ Cell::Cell(int x, int y, int width, int height){
     y_ = y * height;
     width_ = width;
     height_ = height;
+    int percent = rand() % 100 + 1;
+    if(percent <= 5){
+        is_bomb = true;
+    }
+    else if(percent <= 15){
+        is_torpedo = true;
+    }
 }
 int Cell::clicked_button=0;
 /**

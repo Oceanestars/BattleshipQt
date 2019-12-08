@@ -66,6 +66,8 @@ private:
   bool next_turn_status;
   bool is_hit;
   bool is_boat;
+  bool is_bomb;
+  bool is_torpedo;
 
 
   QColor color_;
