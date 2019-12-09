@@ -58,6 +58,10 @@ private slots:
 
     void ChangeScore();
 
+    void Bomb(Cell *c);
+
+    void Torpedo(Cell *c);
+
 private:
     Ui::MainWindow *ui;
     Cell * cells[10][10];

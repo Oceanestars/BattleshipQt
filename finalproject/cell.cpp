@@ -134,6 +134,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
             }
         }
         if(this->is_bomb){
+            this->bom(this);
             if(this->grid == 1){
                 if(!this->is_boat){
                     this->set_color(QColor(255,255,255));

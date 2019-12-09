@@ -67,6 +67,7 @@ signals:
     void increase();
     void decrease();
     void neighbors(int x,int y);
+    void bom(Cell *);
     void scorechanger(Cell *p);
 
 private:

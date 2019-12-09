@@ -48,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
             cells[i][j] = item;
             BuildGrid_->addItem(item);
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
+            connect(item, &Cell::bom, this, &MainWindow::Bomb);
         }
     }
 
@@ -66,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
             cells2[i][j] = item;
             BuildGrid_2->addItem(item);
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
+            connect(item, &Cell::bom, this, &MainWindow::Bomb);
         }
     }
 }
@@ -187,5 +189,95 @@ void MainWindow::WinnerBar(){
                 tr("Congratulation"),
                 tr("The winner is Player 2") );
     }
+
+}
+
+void MainWindow::Bomb(Cell *c){
+    int x = c->get_x();
+    int y = c->get_y();
+    int width = c->get_width();
+    int height = c->get_height();
+    x = x/width;
+    y = y/height;
+    Cell * temp = new Cell(1,1,1,1,1);
+    if(x<9 && x>0 && y<9 && y>0){
+        if(c->grid == 1){
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells[x-1][y];
+            if(!temp->is_boat){
+                temp->set_color(QColor(255,255,255));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[x][y-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(255,255,255));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[x+1][y];
+            if(!temp->is_boat){
+                temp->set_color(QColor(255,255,255));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[x][y+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(255,255,255));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            update();
+        }
+        else{
+            if(!c->is_boat){
+                c->set_color(QColor(0,25,0));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells2[x-1][y];
+            if(!temp->is_boat){
+                temp->set_color(QColor(255,0,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[x-2][y+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(255,0,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[x-1][y+2];
+            if(!temp->is_boat){
+                temp->set_color(QColor(255,0,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[x][y+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(255,0,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            update();
+        }
+    }
+}
+
+void MainWindow::Torpedo(Cell *c){
 
 }
