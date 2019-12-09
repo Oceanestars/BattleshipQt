@@ -101,10 +101,11 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
             //ishidden1=true;
             this->is_boat=true;
             update();
-            return;
+            //return;
         }
 
     }
+  }
     if(event->button() == Qt::LeftButton){
         qDebug()<<"Can we get to here?";
         if(this->is_boat){
@@ -113,13 +114,16 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
         else if(this->is_bomb){
             if(this->grid == 1){
+                this->set_color(QColor(255,255,255));
                 emit p2_update(false,true);
             }
             else{
+                this->set_color(QColor(255,255,255));
                 emit p1_update(false,true);
             }
         }
         else if(this->is_torpedo){
+            this->set_color(QColor(255,255,255));
 
         }
         else{
@@ -132,7 +136,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
     qDebug()<<"This cells game bool is set to:";
     qDebug()<<this->is_game;
      Cell::clicked_button--;
-}
+
 }
 
 
