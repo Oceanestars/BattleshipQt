@@ -23,6 +23,8 @@ We have our class Cell.
 #include <QtWidgets>
 #include <QObject>
 
+enum class SquareType { Boat, Bomb, Torpedo,Water};
+
 class Cell : public QObject, public QGraphicsItem {
     Q_OBJECT
 
@@ -59,10 +61,8 @@ public:
     static bool torp_mode;
     static bool bomb_mode;
     bool is_hit;
-    bool is_boat;
-    bool is_bomb;
-    bool is_torpedo;
     int grid;
+    SquareType s;
 
 
 signals:

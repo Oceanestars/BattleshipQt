@@ -288,35 +288,35 @@ void MainWindow::Bomb(Cell *c){
 
     if(x<9 && x>0 && y<9 && y>0){
         if(c->grid == 1){
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
-            else{
+            else if(c->s == SquareType::Boat){
                c->set_color(QColor(255,0,0));
             }
             temp = cells[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -327,35 +327,35 @@ void MainWindow::Bomb(Cell *c){
             update();
         }
         else{
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -369,21 +369,21 @@ void MainWindow::Bomb(Cell *c){
     }
     else if(x==0 && y==9){
         if(c->grid == 1){
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -391,21 +391,21 @@ void MainWindow::Bomb(Cell *c){
             }
         }
         else{
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells2[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -415,21 +415,21 @@ void MainWindow::Bomb(Cell *c){
     }
     else if(x==0 && y==0){
         if(c->grid == 1){
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -437,21 +437,21 @@ void MainWindow::Bomb(Cell *c){
             }
         }
         else{
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells2[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -461,21 +461,21 @@ void MainWindow::Bomb(Cell *c){
     }
     else if(x==9 && y==0){
         if(c->grid == 1){
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -483,21 +483,21 @@ void MainWindow::Bomb(Cell *c){
             }
         }
         else{
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells2[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -507,21 +507,21 @@ void MainWindow::Bomb(Cell *c){
     }
     else if(x==9 && y==9){
         if(c->grid == 1){
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -529,21 +529,21 @@ void MainWindow::Bomb(Cell *c){
             }
         }
         else{
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells2[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -553,28 +553,28 @@ void MainWindow::Bomb(Cell *c){
     }
     else if(x==0){
         if(c->grid == 1){
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -582,28 +582,28 @@ void MainWindow::Bomb(Cell *c){
             }
         }
         else{
-            if(!c->is_boat){
+            if(temp->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells2[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -613,28 +613,28 @@ void MainWindow::Bomb(Cell *c){
     }
     else if(y==0){
         if(c->grid == 1){
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -642,28 +642,28 @@ void MainWindow::Bomb(Cell *c){
             }
         }
         else{
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -673,28 +673,28 @@ void MainWindow::Bomb(Cell *c){
     }
     else if(y==9){
         if(c->grid == 1){
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -702,28 +702,28 @@ void MainWindow::Bomb(Cell *c){
             }
         }
         else{
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -733,28 +733,28 @@ void MainWindow::Bomb(Cell *c){
     }
     else{
         if(c->grid == 1){
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -762,28 +762,28 @@ void MainWindow::Bomb(Cell *c){
             }
         }
         else{
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                c->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x-1];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y+1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -804,7 +804,7 @@ void MainWindow::Torpedo(Cell *c){
     qDebug()<<"x:"<<x;
     qDebug()<<"y:"<<y;
     if(x == 9){
-        if(!c->is_boat){
+        if(c->s != SquareType::Boat){
             c->set_color(QColor(255,255,255));
         }
         else{
@@ -813,14 +813,14 @@ void MainWindow::Torpedo(Cell *c){
     }
     else{
         if(c->grid == 1){
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                 c->set_color(QColor(255,0,0));
             }
             temp = cells[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{
@@ -828,14 +828,14 @@ void MainWindow::Torpedo(Cell *c){
             }
         }
         else{
-            if(!c->is_boat){
+            if(c->s != SquareType::Boat){
                 c->set_color(QColor(255,255,255));
             }
             else{
                 c->set_color(QColor(255,0,0));
             }
             temp = cells2[y-1][x];
-            if(!temp->is_boat){
+            if(temp->s != SquareType::Boat){
                 temp->set_color(QColor(255,255,255));
             }
             else{

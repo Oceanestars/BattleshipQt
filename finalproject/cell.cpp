@@ -21,6 +21,7 @@ We have implemented our class Cell to create the grid.
 #include <QtWidgets>
 
 
+
 /**
 Constructor
 */
@@ -35,10 +36,13 @@ Cell::Cell(int x, int y, int width, int height, int g){
     grid = g;
     int percent = rand() % 100 + 1;
     if(percent <= 5){
-        is_bomb = true;
+        s=SquareType::Bomb;
     }
     else if(percent <= 15){
-        is_torpedo = true;
+        s=SquareType::Torpedo;
+    }
+    else{
+        s=SquareType::Water;
     }
 }
 int Cell::clicked_button=0;
@@ -147,7 +151,8 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
             this->set_color(QColor(242,19,131));
             //Cell::clicked_button--;
             //ishidden1=true;
-            this->is_boat=true;
+            this->s = SquareType::Boat;
+            //this->is_boat=true;
             update();
             qDebug()<<"Score should be zero"<<score;
             //return;
@@ -157,7 +162,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
   }
     if(event->button() == Qt::LeftButton && is_game1==true && is_game2==true){
         //qDebug()<<"Can we get to here?";
-        if(this->is_boat){
+        if(this->s==SquareType::Boat){
             this->set_color(QColor(255,0,0));
             this->is_hit = true;
             this->update();
@@ -172,34 +177,26 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
              qDebug()<<"Score2:"<<score2;
             }
         }
-        if(this->is_bomb){
+        if(this->s==SquareType::Bomb){
             if(this->grid == 1){
-                if(!this->is_boat){
-                    this->set_color(QColor(255,255,255));
-                }
+                this->set_color(QColor(255,255,255));
                 inv_b2++;
                 this->update();
             }
             else{
-                if(!this->is_boat){
-                    this->set_color(QColor(255,255,255));
-                }
+                this->set_color(QColor(255,255,255));
                 inv_b1++;
                 this->update();
             }
         }
-        if(this->is_torpedo){
+        if(this->s==SquareType::Torpedo){
             if(this->grid == 1){
-                if(!this->is_boat){
-                    this->set_color(QColor(255,255,255));
-                }
+                this->set_color(QColor(255,255,255));
                 inv_t2++;
                 this->update();
             }
             else{
-                if(!this->is_boat){
-                    this->set_color(QColor(255,255,255));
-                }
+                this->set_color(QColor(255,255,255));
                 inv_t1++;
                 this->update();
             }
@@ -232,7 +229,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
                 this->update();
             }
         }
-        else if (!this->is_boat){
+        else if (this->s==SquareType::Water){
             qDebug()<<"WTF";
             this->set_color(QColor(255,255,255));
             this->update();
