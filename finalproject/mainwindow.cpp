@@ -44,9 +44,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
-            Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10);
+            Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,1);
             cells[i][j] = item;
             BuildGrid_->addItem(item);
+            connect(item, &Cell::p1_update, this, &MainWindow::p1_inv_update);
         }
     }
 
@@ -61,9 +62,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
-            Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10);
+            Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,2);
             cells2[i][j] = item;
             BuildGrid_2->addItem(item);
+            connect(item, &Cell::p2_update, this, &MainWindow::p2_inv_update);
         }
     }
 }
@@ -77,6 +79,7 @@ void MainWindow::on_Uboat1_clicked()
 {
     Cell::clicked_button=2;
     ui->Uboat1->setEnabled(false);
+
 }
 
 void MainWindow::on_Submarine1_clicked()
@@ -101,7 +104,6 @@ void MainWindow::HideCell(){
 
             cells[i][j]->set_color(color);
             cells[i][j]->is_game = true;
-
         }
     }
     update();
@@ -123,7 +125,7 @@ void MainWindow::HideCell2(){
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
             cells2[i][j]->set_color(color);
-            cells[i][j]->is_game = true;
+            cells2[i][j]->is_game = true;
         }
     }
     update();
@@ -153,4 +155,28 @@ void MainWindow::on_Done2_clicked()
 {
     ishidden2=true;
     HideCell2();
+}
+
+void MainWindow::p1_inv_update(bool t, bool b)
+{
+    if(t){
+        ui->bomb_1->setText(QString::number(1));
+        p1_b = true;
+    }
+    else if(b){
+        ui->torpedo_1->setText(QString::number(1));
+        p1_t = true;
+    }
+}
+
+void MainWindow::p2_inv_update(bool t, bool b)
+{
+    if(t){
+        ui->bomb_2->setText(QString::number(1));
+        p2_b = true;
+    }
+    else if(b){
+        ui->torpedo_2->setText(QString::number(1));
+        p2_t = true;
+    }
 }

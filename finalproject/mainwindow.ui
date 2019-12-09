@@ -171,7 +171,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="score_1">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -184,7 +184,7 @@
      <string>Score:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="score_2">
     <property name="geometry">
      <rect>
       <x>650</x>
@@ -314,7 +314,7 @@
      <string>infinity</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="torpedo_1">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -327,7 +327,7 @@
      <string>0</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
+   <widget class="QLabel" name="bomb_1">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -353,7 +353,7 @@
      <string>infinity</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_9">
+   <widget class="QLabel" name="torpedo_2">
     <property name="geometry">
      <rect>
       <x>600</x>
@@ -366,7 +366,7 @@
      <string>0</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_10">
+   <widget class="QLabel" name="bomb_2">
     <property name="geometry">
      <rect>
       <x>710</x>
@@ -438,7 +438,7 @@
      <x>0</x>
      <y>0</y>
      <width>901</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

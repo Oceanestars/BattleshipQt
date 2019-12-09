@@ -56,6 +56,10 @@ private slots:
 
     void on_Done2_clicked();
 
+    void p1_inv_update(bool t, bool b);
+
+    void p2_inv_update(bool t, bool b);
+
 private:
     Ui::MainWindow *ui;
     Cell * cells[10][10];
@@ -69,6 +73,14 @@ private:
     void HideCell2();
     bool ishidden1=false;
     bool ishidden2=false;
+    bool torp1 = false;
+    bool bomb1 = false;
+    bool torp2 = false;
+    bool bomb2 = false;
+    bool p1_t = false;
+    bool p1_b = false;
+    bool p2_t = false;
+    bool p2_b = false;
 
 
 };
