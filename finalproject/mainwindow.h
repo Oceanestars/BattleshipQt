@@ -62,12 +62,15 @@ private slots:
 
     void Torpedo(Cell *c);
 
+    void on_restart_game_clicked();
+
 private:
     Ui::MainWindow *ui;
     Cell * cells[10][10];
     Cell * cells2[10][10];
     QGraphicsScene *BuildGrid_;
     QGraphicsScene *BuildGrid_2;
+    QGraphicsScene *BuildGraph_;
     int cell_height_;
     int cell_width_;
     int turn_ = 0;
@@ -84,7 +87,13 @@ private:
     bool p1_b = false;
     bool p2_t = false;
     bool p2_b = false;
-   // int score =0;
+    std::vector <Bar*> bars_;
+    int y_bar;
+    double h_bar;
+    int bar_height_;
+    int bar_width_;
+    int Gamescore1 =0;
+    int Gamescore2 =0;
 
 
 };

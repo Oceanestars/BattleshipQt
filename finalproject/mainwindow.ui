@@ -424,11 +424,24 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>650</x>
-      <y>440</y>
-      <width>231</width>
-      <height>121</height>
+      <x>640</x>
+      <y>450</y>
+      <width>200</width>
+      <height>100</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="restart_game">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>500</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Restart</string>
     </property>
    </widget>
   </widget>
