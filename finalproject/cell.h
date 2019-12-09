@@ -48,7 +48,8 @@ public:
     void set_is_game(bool b){is_game=b;}
 
     static int clicked_button;
-
+    static int score;
+    static bool is_game;
 
 
 signals:
@@ -57,6 +58,7 @@ signals:
     void neighbors(int x,int y);
     void p2_update(bool f,bool s);
     void p1_update(bool f, bool s);
+    void scorechanger(Cell *p);
 
 private:
   int x_;
@@ -70,7 +72,8 @@ private:
   bool is_boat;
   bool is_bomb;
   bool is_torpedo;
-  bool is_game = false;
+  //bool is_game = false;
+
 
 
   QColor color_;

@@ -66,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
             cells2[i][j] = item;
             BuildGrid_2->addItem(item);
             connect(item, &Cell::p2_update, this, &MainWindow::p2_inv_update);
+            connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
         }
     }
 }
@@ -154,6 +155,7 @@ void MainWindow::on_Done2_clicked()
 {
     ishidden2=true;
     HideCell2();
+    Cell::is_game=true;
 }
 
 void MainWindow::p1_inv_update(bool t, bool b)
@@ -178,4 +180,9 @@ void MainWindow::p2_inv_update(bool t, bool b)
         ui->torpedo_2->setText(QString::number(1));
         p2_t = true;
     }
+}
+
+void MainWindow::ChangeScore(){
+    ui->ScorePlayer1->setDigitCount(Cell::score);
+
 }

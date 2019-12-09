@@ -13,6 +13,7 @@ We have implemented our class Cell to create the grid.
 #include "cell.h"
 #include "mainwindow.h"
 #include <mainwindow.cpp>
+#include "ui_mainwindow.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
@@ -41,6 +42,8 @@ Cell::Cell(int x, int y, int width, int height, int g){
     }
 }
 int Cell::clicked_button=0;
+int Cell::score=0;
+bool Cell::is_game=false;
 /**
  * Draws the outline for the cells so that we can contain our cells within a square.
  * @param nothing
@@ -101,20 +104,30 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
             //ishidden1=true;
             this->is_boat=true;
             update();
+            qDebug()<<"Score should be zero"<<score;
             //return;
         }
 
     }
   }
-    if(event->button() == Qt::LeftButton){
-        qDebug()<<"Can we get to here?";
+    if(event->button() == Qt::LeftButton && is_game==true){
+        //qDebug()<<"Can we get to here?";
         if(this->is_boat){
             this->set_color(QColor(255,0,0));
             this->is_hit = true;
+             score++;
+            qDebug()<<"Score:"<<score;
+
+
+            emit scorechanger(this);
+
         }
         else if(this->is_bomb){
             if(this->grid == 1){
                 this->set_color(QColor(255,255,255));
+                //score++;
+                //ui->ScorePlayer1->setText(score);
+
                 emit p2_update(false,true);
             }
             else{
@@ -127,14 +140,14 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
         }
         else{
-            qDebug()<<"WTF";
+            //qDebug()<<"WTF";
             this->set_color(QColor(255,255,255));
         }
     }
     update();
-    qDebug()<<"Hellooooo";
-    qDebug()<<"This cells game bool is set to:";
-    qDebug()<<this->is_game;
+    //qDebug()<<"Hellooooo";
+    //qDebug()<<"This cells game bool is set to:";
+    //qDebug()<<this->is_game;
      Cell::clicked_button--;
 
 }

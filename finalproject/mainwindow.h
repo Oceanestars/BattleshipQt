@@ -59,6 +59,7 @@ private slots:
     void p1_inv_update(bool t, bool b);
 
     void p2_inv_update(bool t, bool b);
+    void ChangeScore();
 
 private:
     Ui::MainWindow *ui;
@@ -81,6 +82,7 @@ private:
     bool p1_b = false;
     bool p2_t = false;
     bool p2_b = false;
+   // int score =0;
 
 
 };

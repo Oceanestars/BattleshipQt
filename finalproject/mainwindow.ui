@@ -151,7 +151,7 @@
      <string>Player 2</string>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
+   <widget class="QLCDNumber" name="ScorePlayer1">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -161,7 +161,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumber_2">
+   <widget class="QLCDNumber" name="ScorePlayer2">
     <property name="geometry">
      <rect>
       <x>710</x>
@@ -438,7 +438,7 @@
      <x>0</x>
      <y>0</y>
      <width>901</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
