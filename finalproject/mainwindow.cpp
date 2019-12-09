@@ -201,9 +201,8 @@ void MainWindow::ChangeScore(){
 //    ui->torpedo_2->setText(QString::number(Cell::score));
         qDebug()<<"ScoreFinal:"<<Cell::score;
         qDebug()<<"ScoreFinal2:"<<Cell::score2;
-//        while(Cell::is_game1==true && Cell::is_game2==true){
-//        WinnerBar();
-//    }
+        WinnerBar();
+
 }
 
 void MainWindow::WinnerBar(){
@@ -211,14 +210,48 @@ void MainWindow::WinnerBar(){
         QMessageBox::information(
                 this,
                 tr("Congratulation"),
-                tr("The winner is Player 1") );
+                tr("The winner is Player 2") );
+
 
     }
     else if(Cell::score2==10){
         QMessageBox::information(
                 this,
                 tr("Congratulation"),
-                tr("The winner is Player 2") );
+                tr("The winner is Player 1") );
     }
+
+}
+
+void MainWindow::on_restart_game_clicked()
+{
+
+    BuildGrid_->clear();
+    BuildGrid_2->clear();
+//    BuildGraph_->clear();
+//    BuildGraph_->update();
+
+
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 10; j++) {
+            Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,1);
+            cells[i][j] = item;
+            BuildGrid_->addItem(item);
+            connect(item, &Cell::p1_update, this, &MainWindow::p1_inv_update);
+            connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
+        }
+    }
+
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 10; j++) {
+            Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,2);
+            cells2[i][j] = item;
+            BuildGrid_2->addItem(item);
+            connect(item, &Cell::p2_update, this, &MainWindow::p2_inv_update);
+             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
+
+        }
+    }
+
 
 }

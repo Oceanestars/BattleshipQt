@@ -127,9 +127,6 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
              score2++;
              qDebug()<<"Score2:"<<score2;
             }
-
-
-
             emit scorechanger(this);
 
         }

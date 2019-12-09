@@ -68,8 +68,7 @@ private:
   int width_;
   int height_;
   int grid;
-  bool current_status;
-  bool next_turn_status;
+
   bool is_hit;
   bool is_boat;
   bool is_bomb;
