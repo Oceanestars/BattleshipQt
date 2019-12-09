@@ -52,14 +52,16 @@ public:
     static int score2;
     static bool is_game1;
     static bool is_game2;
+    static int inv_t2;
+    static int inv_t1;
+    static int inv_b1;
+    static int inv_b2;
 
 
 signals:
     void increase();
     void decrease();
     void neighbors(int x,int y);
-    void p2_update(bool f,bool s);
-    void p1_update(Cell *p);
     void scorechanger(Cell *p);
 
 private:

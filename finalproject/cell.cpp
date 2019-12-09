@@ -46,6 +46,10 @@ int Cell::score=0;
 int Cell::score2=0;
 bool Cell::is_game1=false;
 bool Cell::is_game2=false;
+int Cell::inv_t2=0;
+int Cell::inv_t1=0;
+int Cell::inv_b1=0;
+int Cell::inv_b2=0;
 /**
  * Draws the outline for the cells so that we can contain our cells within a square.
  * @param nothing
@@ -130,29 +134,31 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
             emit scorechanger(this);
 
         }
-        else if(this->is_bomb){
+        if(this->is_bomb){
             if(this->grid == 1){
                 this->set_color(QColor(255,255,255));
-                //score++;
-               qDebug()<<"Bomb:";
-                //ui->ScorePlayer1->setText(score);
-
-                emit p2_update(false,true); //torpedo,bomb
+                inv_b2++;
             }
             else{
                 this->set_color(QColor(255,255,255));
-                emit p1_update(this);
-                 qDebug()<<"Bomb2:";
+                inv_b1++;
             }
         }
-        else if(this->is_torpedo){
-            this->set_color(QColor(255,255,255));
-
+        if(this->is_torpedo){
+            if(this->grid == 1){
+                this->set_color(QColor(255,255,255));
+                inv_t2++;
+            }
+            else{
+                this->set_color(QColor(255,255,255));
+                inv_t1++;
+            }
         }
         else{
             //qDebug()<<"WTF";
             this->set_color(QColor(255,255,255));
         }
+        emit scorechanger(this);
     }
     update();
     //qDebug()<<"Hellooooo";

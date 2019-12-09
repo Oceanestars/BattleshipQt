@@ -47,7 +47,6 @@ MainWindow::MainWindow(QWidget *parent)
             Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,1);
             cells[i][j] = item;
             BuildGrid_->addItem(item);
-            connect(item, &Cell::p1_update, this, &MainWindow::p1_inv_update);
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
         }
     }
@@ -66,9 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
             Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,2);
             cells2[i][j] = item;
             BuildGrid_2->addItem(item);
-            connect(item, &Cell::p2_update, this, &MainWindow::p2_inv_update);
-             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
-
+            connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
         }
     }
 }
@@ -105,7 +102,6 @@ void MainWindow::HideCell(){
         for(int j = 0; j < 10; j++) {
 
             cells[i][j]->set_color(color);
-            //cells[i][j]->set_is_game(true);
             qDebug()<<"Hello";
         }
     }
@@ -162,43 +158,14 @@ void MainWindow::on_Done2_clicked()
 
 }
 
-void MainWindow::p1_inv_update()
-{
-//    qDebug()<<"Are we in bomb?:";
-//    if(t){
-
-//        ui->torpedo_1->setText(QString::number(1));
-//        p1_t = true;
-
-//    }
-//    else if(b){
-//         qDebug()<<"Bomb:";
-//        ui->bomb_1->setText(QString::number(1));
-//        p1_b = true;
-
-   // }
-    qDebug()<<"Are we in bomb?:";
-    ui->bomb_1->setText(QString::number(1));
-}
-
-void MainWindow::p2_inv_update(bool t, bool b)
-{
-    if(t){
-        ui->torpedo_2->setText(QString::number(1));
-        p2_t = true;
-   }
-    else if(b){
-
-        ui->bomb_2->setText(QString::number(1));
-        p2_b = true;
-    }
-}
-
 void MainWindow::ChangeScore(){
 
     ui->ScorePlayer1->display(Cell::score);
     ui->ScorePlayer2->display(Cell::score2);
-//    ui->torpedo_2->setText(QString::number(Cell::score));
+    ui->torpedo_2->setText(QString::number(Cell::inv_t2));
+    ui->torpedo_1->setText(QString::number(Cell::inv_t1));
+    ui->bomb_2->setText(QString::number(Cell::inv_b2));
+    ui->bomb_1->setText(QString::number(Cell::inv_b1));
         qDebug()<<"ScoreFinal:"<<Cell::score;
         qDebug()<<"ScoreFinal2:"<<Cell::score2;
         WinnerBar();
