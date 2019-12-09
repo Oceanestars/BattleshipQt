@@ -67,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
             cells2[i][j] = item;
             BuildGrid_2->addItem(item);
             connect(item, &Cell::p2_update, this, &MainWindow::p2_inv_update);
+             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
 
         }
     }
@@ -194,8 +195,30 @@ void MainWindow::p2_inv_update(bool t, bool b)
 }
 
 void MainWindow::ChangeScore(){
+
     ui->ScorePlayer1->display(Cell::score);
+    ui->ScorePlayer2->display(Cell::score2);
 //    ui->torpedo_2->setText(QString::number(Cell::score));
         qDebug()<<"ScoreFinal:"<<Cell::score;
+        qDebug()<<"ScoreFinal2:"<<Cell::score2;
+//        while(Cell::is_game1==true && Cell::is_game2==true){
+//        WinnerBar();
+//    }
+}
+
+void MainWindow::WinnerBar(){
+    if(Cell::score==10){
+        QMessageBox::information(
+                this,
+                tr("Congratulation"),
+                tr("The winner is Player 1") );
+
+    }
+    else if(Cell::score2==10){
+        QMessageBox::information(
+                this,
+                tr("Congratulation"),
+                tr("The winner is Player 2") );
+    }
 
 }

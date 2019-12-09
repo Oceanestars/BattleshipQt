@@ -154,7 +154,7 @@
    <widget class="QLCDNumber" name="ScorePlayer1">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>690</x>
       <y>40</y>
       <width>64</width>
       <height>23</height>
@@ -164,7 +164,7 @@
    <widget class="QLCDNumber" name="ScorePlayer2">
     <property name="geometry">
      <rect>
-      <x>710</x>
+      <x>360</x>
       <y>40</y>
       <width>64</width>
       <height>23</height>
@@ -174,7 +174,7 @@
    <widget class="QLabel" name="score_1">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>310</x>
       <y>40</y>
       <width>59</width>
       <height>16</height>
@@ -187,7 +187,7 @@
    <widget class="QLabel" name="score_2">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>640</x>
       <y>40</y>
       <width>59</width>
       <height>16</height>

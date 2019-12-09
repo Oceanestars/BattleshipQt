@@ -72,6 +72,7 @@ private:
     int turn_ = 0;
     void HideCell();
     void HideCell2();
+    void WinnerBar();
     bool ishidden1=false;
     bool ishidden2=false;
     bool torp1 = false;

@@ -43,6 +43,7 @@ Cell::Cell(int x, int y, int width, int height, int g){
 }
 int Cell::clicked_button=0;
 int Cell::score=0;
+int Cell::score2=0;
 bool Cell::is_game1=false;
 bool Cell::is_game2=false;
 /**
@@ -116,8 +117,17 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if(this->is_boat){
             this->set_color(QColor(255,0,0));
             this->is_hit = true;
+            if (grid ==1)
+            {
              score++;
-            qDebug()<<"Score:"<<score;
+             qDebug()<<"Score:"<<score;
+            }
+           else if (grid==2){
+              qDebug()<<"Grid2";
+             score2++;
+             qDebug()<<"Score2:"<<score2;
+            }
+
 
 
             emit scorechanger(this);

@@ -49,6 +49,7 @@ public:
 
     static int clicked_button;
     static int score;
+    static int score2;
     static bool is_game1;
     static bool is_game2;
 
