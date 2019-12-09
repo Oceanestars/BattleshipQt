@@ -121,7 +121,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if(this->is_boat){
             this->set_color(QColor(255,0,0));
             this->is_hit = true;
-            update();
+            this->update();
             if (grid ==1)
             {
              score++;
@@ -132,42 +132,47 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
              score2++;
              qDebug()<<"Score2:"<<score2;
             }
-
-            emit scorechanger(this);
-
         }
         if(this->is_bomb){
             if(this->grid == 1){
-                this->set_color(QColor(255,255,255));
+                if(!this->is_boat){
+                    this->set_color(QColor(255,255,255));
+                }
                 inv_b2++;
-                update();
+                this->update();
             }
             else{
-                this->set_color(QColor(255,255,255));
+                if(!this->is_boat){
+                    this->set_color(QColor(255,255,255));
+                }
                 inv_b1++;
-                update();
+                this->update();
             }
         }
         if(this->is_torpedo){
             if(this->grid == 1){
-                this->set_color(QColor(255,255,255));
+                if(!this->is_boat){
+                    this->set_color(QColor(255,255,255));
+                }
                 inv_t2++;
-                update();
+                this->update();
             }
             else{
-                this->set_color(QColor(255,255,255));
+                if(!this->is_boat){
+                    this->set_color(QColor(255,255,255));
+                }
                 inv_t1++;
-                update();
+                this->update();
             }
         }
-        else{
-            //qDebug()<<"WTF";
+        else if (!this->is_boat){
+            qDebug()<<"WTF";
             this->set_color(QColor(255,255,255));
-            update();
+            this->update();
         }
-        emit scorechanger(this);
     }
     update();
+    emit scorechanger(this);
     //qDebug()<<"Hellooooo";
     //qDebug()<<"This cells game bool is set to:";
     //qDebug()<<this->is_game;
