@@ -27,7 +27,7 @@ class Cell : public QObject, public QGraphicsItem {
     Q_OBJECT
 
 public:
-    Cell(int x, int y, int width, int height); //constructor
+    Cell(int x, int y, int width, int height, int grid); //constructor
     int get_x() const { return x_; }  // inline member function
     int get_y() const { return y_; }  // inline member function
     int get_width() { return width_; }
@@ -57,12 +57,15 @@ signals:
     void increase();
     void decrease();
     void neighbors(int x,int y);
+    void p2_update(bool f,bool s);
+    void p1_update(bool f, bool s);
 
 private:
   int x_;
   int y_;
   int width_;
   int height_;
+  int grid;
   bool current_status;
   bool next_turn_status;
   bool is_hit;

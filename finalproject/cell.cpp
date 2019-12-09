@@ -23,7 +23,7 @@ We have implemented our class Cell to create the grid.
 /**
 Constructor
 */
-Cell::Cell(int x, int y, int width, int height){
+Cell::Cell(int x, int y, int width, int height, int g){
     QColor color(255, 0, 0);
     color.setRgb(255, 255, 255);
     color_ = color;
@@ -31,6 +31,7 @@ Cell::Cell(int x, int y, int width, int height){
     y_ = y * height;
     width_ = width;
     height_ = height;
+    grid = g;
     int percent = rand() % 100 + 1;
     if(percent <= 5){
         is_bomb = true;
@@ -91,16 +92,8 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //qDebug()<<clicked_button;
     if(Cell::clicked_button>0){
         qDebug()<<Cell::clicked_button;
-    if(event->modifiers() == Qt::ShiftModifier)
-    {
-        int x = this->get_x()/30;
-        int y = this->get_y()/30;
 
-        return;
-
-    }
-
-    if(event->button() == Qt::LeftButton){
+    if(event->button() == Qt::LeftButton && !this->is_game){
         if(this->get_color() == QColor(255, 255, 255)){
 
             this->set_color(QColor(242,19,131));
@@ -110,8 +103,32 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
 
     }
+    else if(event->button() == Qt::LeftButton && this->is_game){
+        qDebug()<<"Can we get to here?";
+        if(this->is_boat){
+            this->set_color(QColor(255,0,0));
+            this->is_hit = true;
+        }
+        else if(this->is_bomb){
+            if(this->grid == 1){
+                emit p2_update(false,true);
+            }
+            else{
+                emit p1_update(false,true);
+            }
+        }
+        else if(this->is_torpedo){
+
+        }
+        else{
+            qDebug()<<"WTF";
+            this->set_color(QColor(255,255,255));
+        }
+    }
     update();
-    qDebug()<<"Hello";
+    qDebug()<<"Hellooooo";
+    qDebug()<<"This cells game bool is set to:";
+    qDebug()<<this->is_game;
      Cell::clicked_button--;
 }
 }
