@@ -45,11 +45,12 @@ public:
         color_=color;
         update();
     }
-    void set_is_game(bool b){is_game=b;}
+//    void set_is_game(bool b){is_game1=b;}
 
     static int clicked_button;
     static int score;
-    static bool is_game;
+    static bool is_game1;
+    static bool is_game2;
 
 
 signals:
@@ -57,7 +58,7 @@ signals:
     void decrease();
     void neighbors(int x,int y);
     void p2_update(bool f,bool s);
-    void p1_update(bool f, bool s);
+    void p1_update(Cell *p);
     void scorechanger(Cell *p);
 
 private:

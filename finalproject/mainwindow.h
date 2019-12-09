@@ -56,7 +56,7 @@ private slots:
 
     void on_Done2_clicked();
 
-    void p1_inv_update(bool t, bool b);
+    void p1_inv_update();
 
     void p2_inv_update(bool t, bool b);
     void ChangeScore();

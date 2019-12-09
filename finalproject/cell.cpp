@@ -43,7 +43,8 @@ Cell::Cell(int x, int y, int width, int height, int g){
 }
 int Cell::clicked_button=0;
 int Cell::score=0;
-bool Cell::is_game=false;
+bool Cell::is_game1=false;
+bool Cell::is_game2=false;
 /**
  * Draws the outline for the cells so that we can contain our cells within a square.
  * @param nothing
@@ -96,7 +97,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(Cell::clicked_button>0){
         qDebug()<<Cell::clicked_button;
 
-    if(event->button() == Qt::LeftButton && !this->is_game){
+    if(event->button() == Qt::LeftButton && (is_game1==false || is_game2==false)){
         if(this->get_color() == QColor(255, 255, 255)){
 
             this->set_color(QColor(242,19,131));
@@ -110,7 +111,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     }
   }
-    if(event->button() == Qt::LeftButton && is_game==true){
+    if(event->button() == Qt::LeftButton && is_game1==true && is_game2==true){
         //qDebug()<<"Can we get to here?";
         if(this->is_boat){
             this->set_color(QColor(255,0,0));
@@ -126,13 +127,15 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
             if(this->grid == 1){
                 this->set_color(QColor(255,255,255));
                 //score++;
+               qDebug()<<"Bomb:";
                 //ui->ScorePlayer1->setText(score);
 
-                emit p2_update(false,true);
+                emit p2_update(false,true); //torpedo,bomb
             }
             else{
                 this->set_color(QColor(255,255,255));
-                emit p1_update(false,true);
+                emit p1_update(this);
+                 qDebug()<<"Bomb2:";
             }
         }
         else if(this->is_torpedo){
