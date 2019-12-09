@@ -19,6 +19,12 @@ access elements of its library.
 #include <QGraphicsItem>
 #include <QtWidgets>
 
+//Pop up messsage
+//QMessageBox::information(
+//        this,
+//        tr("Congratulation"),
+//        tr("The winner is "+ playername) );
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

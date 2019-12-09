@@ -78,17 +78,20 @@ MainWindow::~MainWindow()
 void MainWindow::on_Uboat1_clicked()
 {
     Cell::clicked_button=2;
+    ui->Uboat1->setEnabled(false);
 
 }
 
 void MainWindow::on_Submarine1_clicked()
 {
     Cell::clicked_button=3;
+    ui->Submarine1->setEnabled(false);
 }
 
 void MainWindow::on_Carrier1_clicked()
 {
     Cell::clicked_button=5;
+    ui->Carrier1->setEnabled(false);
 }
 
 void MainWindow::HideCell(){
@@ -131,17 +134,20 @@ void MainWindow::HideCell2(){
 void MainWindow::on_Uboat2_clicked()
 {
     Cell::clicked_button=2;
+    ui->Uboat2->setEnabled(false);
 }
 
 
 void MainWindow::on_Submarine2_clicked()
 {
     Cell::clicked_button=3;
+    ui->Submarine2->setEnabled(false);
 }
 
 void MainWindow::on_Carrier2_clicked()
 {
     Cell::clicked_button=5;
+    ui->Carrier2->setEnabled(false);
 }
 
 void MainWindow::on_Done2_clicked()
