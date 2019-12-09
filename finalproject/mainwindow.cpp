@@ -173,7 +173,23 @@ void MainWindow::on_Done2_clicked()
     ui->Done2->setEnabled(false);
 
 }
+void MainWindow::on_Torpedo_1_clicked()
+{
+    Cell::torp_mode = true;
+}
 
+void MainWindow::on_Torpedo_2_clicked()
+{
+    Cell::torp_mode=true;
+}
+void MainWindow::on_Bomb_1_clicked()
+{
+    Cell::bomb_mode = true;
+}
+void MainWindow::on_Bomb_2_clicked()
+{
+    Cell::bomb_mode = true;
+}
 void MainWindow::ChangeScore(){
 
     ui->ScorePlayer1->display(Cell::score);
@@ -280,28 +296,28 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -319,28 +335,28 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells2[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -361,14 +377,14 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -383,14 +399,14 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells2[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -407,14 +423,14 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -429,14 +445,14 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells2[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -453,14 +469,14 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -475,14 +491,14 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells2[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -499,14 +515,14 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -521,14 +537,14 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells2[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -545,21 +561,21 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -574,21 +590,21 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells2[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -605,21 +621,21 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -634,21 +650,21 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells2[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -665,21 +681,21 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -694,21 +710,21 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells2[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y][x+1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -725,21 +741,21 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -754,21 +770,21 @@ void MainWindow::Bomb(Cell *c){
             }
             temp = cells2[y][x-1];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y+1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
             }
             temp = cells2[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -805,7 +821,7 @@ void MainWindow::Torpedo(Cell *c){
             }
             temp = cells[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));
@@ -820,7 +836,7 @@ void MainWindow::Torpedo(Cell *c){
             }
             temp = cells2[y-1][x];
             if(!temp->is_boat){
-                temp->set_color(QColor(0,255,0));
+                temp->set_color(QColor(255,255,255));
             }
             else{
                temp->set_color(QColor(255,0,0));

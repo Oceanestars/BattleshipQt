@@ -50,6 +50,8 @@ int Cell::inv_t2=0;
 int Cell::inv_t1=0;
 int Cell::inv_b1=0;
 int Cell::inv_b2=0;
+bool Cell::torp_mode = false;
+bool Cell::bomb_mode = false;
 /**
  * Draws the outline for the cells so that we can contain our cells within a square.
  * @param nothing
@@ -171,36 +173,62 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
             }
         }
         if(this->is_bomb){
-            this->bom(this);
             if(this->grid == 1){
-                //if(!this->is_boat){
-                    //this->set_color(QColor(255,255,255));
-                //}
+                if(!this->is_boat){
+                    this->set_color(QColor(255,255,255));
+                }
                 inv_b2++;
                 this->update();
             }
             else{
-                //if(!this->is_boat){
-                    //this->set_color(QColor(255,255,255));
-                //}
+                if(!this->is_boat){
+                    this->set_color(QColor(255,255,255));
+                }
                 inv_b1++;
                 this->update();
             }
         }
         if(this->is_torpedo){
-            this->torp(this);
             if(this->grid == 1){
-                //if(!this->is_boat){
-                    //this->set_color(QColor(255,255,255));
-                //}
+                if(!this->is_boat){
+                    this->set_color(QColor(255,255,255));
+                }
                 inv_t2++;
                 this->update();
             }
             else{
-                //if(!this->is_boat){
-                    //this->set_color(QColor(255,255,255));
-                //}
+                if(!this->is_boat){
+                    this->set_color(QColor(255,255,255));
+                }
                 inv_t1++;
+                this->update();
+            }
+        }
+        if(torp_mode){
+            if(this->grid == 1 && inv_t2 > 0){
+                inv_t2--;
+                this->torp(this);
+                torp_mode = false;
+                this->update();
+            }
+            else if(inv_t1 > 0){
+                inv_t1--;
+                this->torp(this);
+                torp_mode = false;
+                this->update();
+            }
+        }
+        if(bomb_mode){
+            if(this->grid == 1 && inv_b2 > 0){
+                inv_b2--;
+                this->bom(this);
+                bomb_mode = false;
+                this->update();
+            }
+            else if(inv_b1 > 0){
+                inv_b1--;
+                this->bom(this);
+                bomb_mode = false;
                 this->update();
             }
         }

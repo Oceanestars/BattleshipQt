@@ -56,6 +56,8 @@ public:
     static int inv_t1;
     static int inv_b1;
     static int inv_b2;
+    static bool torp_mode;
+    static bool bomb_mode;
     bool is_hit;
     bool is_boat;
     bool is_bomb;

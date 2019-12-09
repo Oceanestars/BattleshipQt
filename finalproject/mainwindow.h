@@ -64,6 +64,14 @@ private slots:
 
     void on_restart_game_clicked();
 
+    void on_Torpedo_1_clicked();
+
+    void on_Torpedo_2_clicked();
+
+    void on_Bomb_1_clicked();
+
+    void on_Bomb_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     Cell * cells[10][10];
@@ -94,6 +102,8 @@ private:
     int bar_width_;
     int Gamescore1 =0;
     int Gamescore2 =0;
+    bool torp = false;
+    bool bomb = false;
 
 
 };
