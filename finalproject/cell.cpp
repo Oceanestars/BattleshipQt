@@ -33,13 +33,13 @@ Cell::Cell(int x, int y, int width, int height, int g){
     width_ = width;
     height_ = height;
     grid = g;
-    //int percent = rand() % 100 + 1;
-    //if(percent <= 5){
-        //is_bomb = true;
-    //}
-    //else if(percent <= 15){
-        //is_torpedo = true;
-    //}
+    int percent = rand() % 100 + 1;
+    if(percent <= 5){
+        is_bomb = true;
+    }
+    else if(percent <= 15){
+        is_torpedo = true;
+    }
 }
 int Cell::clicked_button=0;
 int Cell::score=0;
@@ -119,20 +119,19 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(event->button() == Qt::LeftButton && is_game1==true && is_game2==true){
         //qDebug()<<"Can we get to here?";
         if(this->is_boat){
-            //this->set_color(QColor(255,0,0));
-            //this->is_hit = true;
-            //if (grid ==1)
-            //{
-             //score++;
-             //qDebug()<<"Score:"<<score;
-            //}
-           //else if (grid==2){
-              //qDebug()<<"Grid2";
-             //score2++;
-             //qDebug()<<"Score2:"<<score2;
-            //}
-            Destroy d = new Destroy();
-            d.hit(this);
+            this->set_color(QColor(255,0,0));
+            this->is_hit = true;
+            update();
+            if (grid ==1)
+            {
+             score++;
+             qDebug()<<"Score:"<<score;
+            }
+           else if (grid==2){
+              qDebug()<<"Grid2";
+             score2++;
+             qDebug()<<"Score2:"<<score2;
+            }
 
             emit scorechanger(this);
 
@@ -141,25 +140,30 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
             if(this->grid == 1){
                 this->set_color(QColor(255,255,255));
                 inv_b2++;
+                update();
             }
             else{
                 this->set_color(QColor(255,255,255));
                 inv_b1++;
+                update();
             }
         }
         if(this->is_torpedo){
             if(this->grid == 1){
                 this->set_color(QColor(255,255,255));
                 inv_t2++;
+                update();
             }
             else{
                 this->set_color(QColor(255,255,255));
                 inv_t1++;
+                update();
             }
         }
         else{
             //qDebug()<<"WTF";
             this->set_color(QColor(255,255,255));
+            update();
         }
         emit scorechanger(this);
     }
@@ -169,21 +173,4 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //qDebug()<<this->is_game;
      Cell::clicked_button--;
 
-}
-
-void Destroy::hit(Cell *c){
-    if(c->is_boat){
-        c->set_color(QColor(255,0,0));
-        c->is_hit = true;
-        if (c->grid ==1)
-        {
-         Cell::score++;
-         qDebug()<<"Score:"<<Cell::score;
-        }
-       else if (c->grid==2){
-          qDebug()<<"Grid2";
-         Cell::score2++;
-         qDebug()<<"Score2:"<<Cell::score2;
-        }
-    }
 }

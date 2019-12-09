@@ -27,7 +27,6 @@ class Cell : public QObject, public QGraphicsItem {
     Q_OBJECT
 
 public:
-    virtual void hit();
     Cell(int x, int y, int width, int height, int grid); //constructor
     int get_x() const { return x_; }  // inline member function
     int get_y() const { return y_; }  // inline member function
@@ -86,15 +85,6 @@ private:
 protected:
   void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 //is hidden and is hit is boat
-};
-class Torpedo: public Cell{
-public:
-    Torpedo(int x, int y, int width, int height, int grid,bool b); //constructor
-    void hit() override;
-};
-class Bomb:public Cell{
-    Bomb(int x, int y, int width, int height, int grid,bool b); //constructor
-    void hit() override;
 };
 
 #endif // CELL_H

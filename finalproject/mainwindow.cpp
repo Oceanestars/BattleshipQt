@@ -44,14 +44,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
-            int percent = rand() % 100 + 1;
-            if(percent <= 5){
-                Cell * item = new Bomb(j, i, cell_width_/10, cell_height_/10,1);
-                is_bomb = true;
-            }
-            else if(percent <= 15){
-                is_torpedo = true;
-            }
             Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,1);
             cells[i][j] = item;
             BuildGrid_->addItem(item);
