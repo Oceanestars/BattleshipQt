@@ -68,6 +68,16 @@ MainWindow::MainWindow(QWidget *parent)
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
         }
     }
+
+    //bar
+
+    BuildGraph_ = new QGraphicsScene;
+    QGraphicsView * graph_view = ui->scorebar;
+    graph_view->setScene(BuildGraph_);
+    graph_view->setSceneRect(0,0,graph_view->frameSize().width(),graph_view->frameSize().height());
+
+    y_bar=graph_view->frameSize().height()-2;
+    h_bar = graph_view->frameSize().height() ;
 }
 
 MainWindow::~MainWindow()
@@ -114,6 +124,7 @@ void MainWindow::on_Done1_clicked()
 {
     ishidden1=true;
     HideCell();
+    ui->Done1->setEnabled(false);
 }
 
 // Second Player
@@ -155,6 +166,7 @@ void MainWindow::on_Done2_clicked()
 {
     ishidden2=true;
     HideCell2();
+    ui->Done2->setEnabled(false);
 
 }
 
@@ -168,24 +180,77 @@ void MainWindow::ChangeScore(){
     ui->bomb_1->setText(QString::number(Cell::inv_b1));
         qDebug()<<"ScoreFinal:"<<Cell::score;
         qDebug()<<"ScoreFinal2:"<<Cell::score2;
-//        while(Cell::is_game1==true && Cell::is_game2==true){
-//        WinnerBar();
-//    }
+
+        WinnerBar();
+
 }
 
 void MainWindow::WinnerBar(){
-    if(Cell::score==10){
-        QMessageBox::information(
-                this,
-                tr("Congratulation"),
-                tr("The winner is Player 1") );
 
-    }
-    else if(Cell::score2==10){
+
+
+    if(Cell::score==10){
+         Gamescore1+=10;
+          Bar* first_bar = new Bar(100, y_bar, Gamescore1);
         QMessageBox::information(
                 this,
                 tr("Congratulation"),
                 tr("The winner is Player 2") );
+        bars_.push_back(first_bar);
+        BuildGraph_->addItem(first_bar);
+
     }
+    else if(Cell::score2==10){
+        Gamescore2+=10;
+         Bar* second_bar = new Bar(50, y_bar, Gamescore2);
+        QMessageBox::information(
+                this,
+                tr("Congratulation"),
+                tr("The winner is Player 1") );
+        bars_.push_back(second_bar);
+        BuildGraph_->addItem(second_bar);
+    }
+
+}
+
+void MainWindow::on_restart_game_clicked()
+{
+    BuildGrid_->clear();
+    BuildGrid_2->clear();
+
+    Cell::score=0;
+    Cell::score2=0;
+    Cell::inv_t2=0;
+    Cell::inv_t1=0;
+    Cell::inv_b1=0;
+    Cell::inv_b2=0;
+    Cell::is_game1=false;
+    Cell::is_game2=false;
+
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 10; j++) {
+            Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,1);
+            cells[i][j] = item;
+            BuildGrid_->addItem(item);
+            connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
+        }
+    }
+
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 10; j++) {
+            Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,2);
+            cells2[i][j] = item;
+            BuildGrid_2->addItem(item);
+            connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
+        }
+    }
+    ui->Uboat1->setEnabled(true);
+    ui->Submarine1->setEnabled(true);
+    ui->Carrier1->setEnabled(true);
+    ui->Uboat2->setEnabled(true);
+    ui->Submarine2->setEnabled(true);
+    ui->Carrier2->setEnabled(true);
+    ui->Done1->setEnabled(true);
+    ui->Done2->setEnabled(true);
 
 }

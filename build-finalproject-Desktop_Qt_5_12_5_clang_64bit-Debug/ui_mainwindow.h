@@ -60,6 +60,7 @@ public:
     QPushButton *Done1;
     QPushButton *Done2;
     QGraphicsView *scorebar;
+    QPushButton *restart_game;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -171,7 +172,10 @@ public:
         scorebar = new QGraphicsView(centralwidget);
         scorebar->setObjectName(QString::fromUtf8("scorebar"));
         scorebar->setEnabled(true);
-        scorebar->setGeometry(QRect(650, 440, 231, 121));
+        scorebar->setGeometry(QRect(640, 450, 200, 100));
+        restart_game = new QPushButton(centralwidget);
+        restart_game->setObjectName(QString::fromUtf8("restart_game"));
+        restart_game->setGeometry(QRect(400, 500, 113, 32));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -216,6 +220,7 @@ public:
         rules->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">U - Boat = Click 2 squares</span></p><p><span style=\" font-weight:600;\">Submarine = Cick 3 squares</span></p><p><span style=\" font-weight:600;\">Carrier = Click 5 squares</span></p><p><span style=\" font-weight:600;\">(You can only add square vertically or horizontally &amp; </span></p><p><span style=\" font-weight:600;\">click done after you've chosen your boats)</span></p></body></html>", nullptr));
         Done1->setText(QApplication::translate("MainWindow", "Done", nullptr));
         Done2->setText(QApplication::translate("MainWindow", "Done", nullptr));
+        restart_game->setText(QApplication::translate("MainWindow", "Restart", nullptr));
     } // retranslateUi
 
 };
