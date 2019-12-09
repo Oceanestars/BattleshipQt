@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
             BuildGrid_->addItem(item);
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
             connect(item, &Cell::bom, this, &MainWindow::Bomb);
+            connect(item, &Cell::torp, this, &MainWindow::Torpedo);
         }
     }
 
@@ -68,6 +69,7 @@ MainWindow::MainWindow(QWidget *parent)
             BuildGrid_2->addItem(item);
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
             connect(item, &Cell::bom, this, &MainWindow::Bomb);
+            connect(item, &Cell::torp, this, &MainWindow::Torpedo);
         }
     }
 
@@ -349,9 +351,480 @@ void MainWindow::Bomb(Cell *c){
             update();
         }
     }
-
+    else if(x==0 && y==9){
+        if(c->grid == 1){
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y][x+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+        else{
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y][x+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+    }
+    else if(x==0 && y==0){
+        if(c->grid == 1){
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells[y+1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y][x+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+        else{
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y+1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y][x+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+    }
+    else if(x==9 && y==0){
+        if(c->grid == 1){
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells[y+1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y][x-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+        else{
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y+1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y][x-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+    }
+    else if(x==9 && y==9){
+        if(c->grid == 1){
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y][x-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+        else{
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y][x-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+    }
+    else if(x==0){
+        if(c->grid == 1){
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y][x+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y+1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+        else{
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y][x+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y+1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+    }
+    else if(y==0){
+        if(c->grid == 1){
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells[y][x-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y][x+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y+1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+        else{
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y][x-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y][x+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y+1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+    }
+    else if(y==9){
+        if(c->grid == 1){
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells[y][x-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y][x+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+        else{
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y][x-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y][x+1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+    }
+    else{
+        if(c->grid == 1){
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells[y][x-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y+1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+        else{
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+               c->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y][x-1];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y+1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+    }
 }
 
 void MainWindow::Torpedo(Cell *c){
-
+    int x = c->get_x();
+    int y = c->get_y();
+    int width = c->get_width();
+    int height = c->get_height();
+    x = x/width;
+    y = y/height;
+    Cell * temp = new Cell(0,0,cell_width_/10, cell_height_/10,1);
+    qDebug()<<"x:"<<x;
+    qDebug()<<"y:"<<y;
+    if(x == 9){
+        if(!c->is_boat){
+            c->set_color(QColor(255,255,255));
+        }
+        else{
+            c->set_color(QColor(255,0,0));
+        }
+    }
+    else{
+        if(c->grid == 1){
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+                c->set_color(QColor(255,0,0));
+            }
+            temp = cells[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+        else{
+            if(!c->is_boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+                c->set_color(QColor(255,0,0));
+            }
+            temp = cells2[y-1][x];
+            if(!temp->is_boat){
+                temp->set_color(QColor(0,255,0));
+            }
+            else{
+               temp->set_color(QColor(255,0,0));
+            }
+        }
+    }
 }

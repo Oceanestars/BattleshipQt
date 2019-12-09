@@ -68,6 +68,7 @@ signals:
     void decrease();
     void neighbors(int x,int y);
     void bom(Cell *);
+    void torp(Cell *);
     void scorechanger(Cell *p);
 
 private:

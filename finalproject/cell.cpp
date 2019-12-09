@@ -173,32 +173,33 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if(this->is_bomb){
             this->bom(this);
             if(this->grid == 1){
-                if(!this->is_boat){
-                    this->set_color(QColor(255,255,255));
-                }
+                //if(!this->is_boat){
+                    //this->set_color(QColor(255,255,255));
+                //}
                 inv_b2++;
                 this->update();
             }
             else{
-                if(!this->is_boat){
-                    this->set_color(QColor(255,255,255));
-                }
+                //if(!this->is_boat){
+                    //this->set_color(QColor(255,255,255));
+                //}
                 inv_b1++;
                 this->update();
             }
         }
         if(this->is_torpedo){
+            this->torp(this);
             if(this->grid == 1){
-                if(!this->is_boat){
-                    this->set_color(QColor(255,255,255));
-                }
+                //if(!this->is_boat){
+                    //this->set_color(QColor(255,255,255));
+                //}
                 inv_t2++;
                 this->update();
             }
             else{
-                if(!this->is_boat){
-                    this->set_color(QColor(255,255,255));
-                }
+                //if(!this->is_boat){
+                    //this->set_color(QColor(255,255,255));
+                //}
                 inv_t1++;
                 this->update();
             }
