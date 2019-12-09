@@ -44,12 +44,10 @@ public:
     void set_color(QColor color){
         color_=color;
         update();
-
-
     }
+    void set_is_game(bool b){is_game=b;}
 
     static int clicked_button;
-    bool is_game = false;
 
 
 
@@ -72,6 +70,7 @@ private:
   bool is_boat;
   bool is_bomb;
   bool is_torpedo;
+  bool is_game = false;
 
 
   QColor color_;

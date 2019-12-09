@@ -95,12 +95,12 @@ void MainWindow::HideCell(){
 
     QColor color(255, 0, 0);
     color.setRgb(0, 0, 200);
-    qDebug()<<"Hello";
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
 
             cells[i][j]->set_color(color);
-            cells[i][j]->is_game = true;
+            cells[i][j]->set_is_game(true);
+            qDebug()<<"Hello";
         }
     }
     update();
@@ -118,11 +118,10 @@ void MainWindow::HideCell2(){
 
     QColor color(255, 0, 0);
     color.setRgb(0, 0, 200);
-    qDebug()<<"Hello";
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
             cells2[i][j]->set_color(color);
-            cells2[i][j]->is_game = true;
+            cells2[i][j]->set_is_game(true);
         }
     }
     update();

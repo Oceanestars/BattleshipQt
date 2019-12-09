@@ -100,10 +100,12 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
             //Cell::clicked_button--;
             //ishidden1=true;
             this->is_boat=true;
+            update();
+            return;
         }
 
     }
-    else if(event->button() == Qt::LeftButton && this->is_game){
+    if(event->button() == Qt::LeftButton){
         qDebug()<<"Can we get to here?";
         if(this->is_boat){
             this->set_color(QColor(255,0,0));
