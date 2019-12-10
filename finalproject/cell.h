@@ -49,7 +49,7 @@ public:
     }
 //    void set_is_game(bool b){is_game1=b;}
 
-    static int clicked_button;
+    static int clicked_button; //setting up boats
     static int score;
     static int score2;
     static bool is_game1;
@@ -128,7 +128,7 @@ class Player : public QObject
     Q_OBJECT
 public:
     Player(){player_type = 1;turns=0;}
-    void take_turn(){turns--;}
+    //void take_turn(){turns--;}
     virtual void set_turn(int x){turns += x;}
     int get_type(){return player_type;}
     int get_turns(){return turns;}
@@ -149,7 +149,8 @@ public:
 private:
     void make_boat();
     
-
+//turn count - action count
+    //track clikcs
 };
 
 

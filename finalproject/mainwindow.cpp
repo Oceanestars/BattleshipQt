@@ -88,17 +88,11 @@ MainWindow::MainWindow(QWidget *parent)
     h_bar = graph_view->frameSize().height() ;
 
     //players
-    if(RulesWindow::num_players == 1){
-        p3_ = new AI();
-        p2_ = new Player();
 
-    }
-    else if(RulesWindow::num_players == 2){
-        p1_ = new Player();
-        p2_ = new Player();
-    }
+    qDebug()<<"Rulewindow:"<<RulesWindow::num_players;
+
 }
-
+bool MainWindow::start_game=false;
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -131,7 +125,7 @@ void MainWindow::HideCell(){
         for(int j = 0; j < 10; j++) {
 
             cells[i][j]->set_color(color);
-            qDebug()<<"Hello";
+//            qDebug()<<"Hello";
         }
     }
     Cell::is_game1=true;
@@ -141,11 +135,28 @@ void MainWindow::HideCell(){
 
 void MainWindow::on_Done1_clicked()
 {
+    if (MainWindow::start_game){
+        qDebug()<<"Try start game";
+        if(RulesWindow::num_players == 2)
+        {
+        p1_= new Player();
+        p2_= new Player();
+        }
+        else if (RulesWindow::num_players == 1)
+        {
+            p3_=new AI();
+            p2_= new Player();
+        }
+        MainWindow::start_game=false;
+
+
+    }
+
     ishidden1=true;
     int t=0;
     if(RulesWindow::num_players == 2){
         p1_->Player::set_turn(1);
-        t = p1_->get_turns();
+        t =  p1_->get_turns();
     }
     else{
         p3_->AI::set_turn(1);
@@ -223,8 +234,8 @@ void MainWindow::ChangeScore(){
     ui->torpedo_1->setText(QString::number(Cell::inv_t1));
     ui->bomb_2->setText(QString::number(Cell::inv_b2));
     ui->bomb_1->setText(QString::number(Cell::inv_b1));
-        qDebug()<<"ScoreFinal:"<<Cell::score;
-        qDebug()<<"ScoreFinal2:"<<Cell::score2;
+//        qDebug()<<"ScoreFinal:"<<Cell::score;
+//        qDebug()<<"ScoreFinal2:"<<Cell::score2;
 
         WinnerBar();
 
@@ -272,6 +283,10 @@ void MainWindow::on_restart_game_clicked()
     Cell::is_game1=false;
     Cell::is_game2=false;
 
+    ui->turn_1->setText("Turns: "+QString::number(0));
+    ui->turn_2->setText("Turns: "+QString::number(0));
+    p1_->Player::set_turn(-1);
+
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
             Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,1);
@@ -280,6 +295,7 @@ void MainWindow::on_restart_game_clicked()
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
             connect(item, &Cell::bom, this, &MainWindow::Bomb);
             connect(item, &Cell::torp, this, &MainWindow::Torpedo);
+            connect(item, &Cell::yes_clicked, this, &MainWindow::click);
         }
     }
 
@@ -291,6 +307,7 @@ void MainWindow::on_restart_game_clicked()
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
             connect(item, &Cell::bom, this, &MainWindow::Bomb);
             connect(item, &Cell::torp, this, &MainWindow::Torpedo);
+            connect(item, &Cell::yes_clicked, this, &MainWindow::click);
         }
     }
     ui->Uboat1->setEnabled(true);
@@ -1093,11 +1110,18 @@ void MainWindow::Torpedo(Cell *c){
 
 void MainWindow::click()
 {
+
     int t=0;
     int t2=0;
+
+//qDebug()<<"p1 debug:"<<p1_->get_turns();
+//qDebug()<<"p2 debug:"<<p2_->get_turns();
+
     if(RulesWindow::num_players == 2){
-        if(p1_->get_turns() > 0){
-            p1_->Player::set_turn(-1);
+
+        if(p1_->get_turns() > 0){ //player's 1 turn
+
+            p1_->Player::set_turn(-1);  // go from 1 to
             t = p1_->get_turns();
             if(t == 0){
                 qDebug()<<"The value of t";
@@ -1110,7 +1134,7 @@ void MainWindow::click()
             }
             ui->turn_1->setText("Turns: "+QString::number(t));
         }
-        else if(p2_->get_turns() > 0){
+        else if(p2_->get_turns() > 0){ //player's 2 turn
             p2_->Player::set_turn(-1);
             t = p2_->get_turns();
             if(p2_->get_turns() == 0){
@@ -1121,7 +1145,7 @@ void MainWindow::click()
             ui->turn_2->setText("Turns: "+QString::number(t));
         }
     }
-    else{
+    else{ //AI Mode
         if(p3_->get_turns() > 0){
             p3_->AI::set_turn(-1);
             t = p3_->get_turns();
@@ -1142,6 +1166,7 @@ void MainWindow::click()
         }
     }
     this->update();
+
 }
 
 void MainWindow::score_check(){

@@ -143,8 +143,10 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //create another slot, if statement to figure out which mode we are in, set boat or hit boat
     //shift
     //qDebug()<<clicked_button;
-    if(is_game1 != true && is_game2 != true){
+    if(is_game1 == true && is_game2 == true){// is game = happens after done
+        qDebug()<<"Yes emitted";
         emit yes_clicked();
+
     }
     if(Cell::clicked_button>0){
         qDebug()<<Cell::clicked_button;
@@ -234,7 +236,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
             }
         }
         else if (this->s==SquareType::Water){
-            qDebug()<<"WTF";
+//            qDebug()<<"WTF";
             this->set_color(QColor(255,255,255));
             this->update();
         }

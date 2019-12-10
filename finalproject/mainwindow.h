@@ -36,6 +36,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    static bool start_game;
 
 private slots:
 
@@ -84,6 +85,7 @@ private:
     Player * p1_;
     Player * p2_;
     AI * p3_;
+
     QGraphicsScene *BuildGrid_;
     QGraphicsScene *BuildGrid_2;
     QGraphicsScene *BuildGraph_;

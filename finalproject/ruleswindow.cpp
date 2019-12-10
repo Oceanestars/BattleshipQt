@@ -51,6 +51,9 @@ void RulesWindow::on_two_player_clicked()
     num_players = 2;
     this->hide();
     game.show();
+   MainWindow::start_game=true;
+
+
 }
 
 void RulesWindow::on_one_player_clicked()
@@ -58,4 +61,6 @@ void RulesWindow::on_one_player_clicked()
     num_players = 1;
     this->hide();
     game.show();
+    MainWindow::start_game=true;
+
 }
