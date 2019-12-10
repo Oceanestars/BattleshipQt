@@ -84,6 +84,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     y_bar=graph_view->frameSize().height()-2;
     h_bar = graph_view->frameSize().height() ;
+
+    //players
+    if(RulesWindow::num_players == 1){
+        p1_ = new AI();
+        p2_ = new Player();
+
+    }
+    else if(RulesWindow::num_players == 2){
+        p1_ = new Player();
+        p2_ = new Player();
+    }
 }
 
 MainWindow::~MainWindow()

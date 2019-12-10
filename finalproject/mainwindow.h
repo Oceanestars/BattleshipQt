@@ -77,6 +77,9 @@ private:
     Ui::MainWindow *ui;
     Cell * cells[10][10];
     Cell * cells2[10][10];
+    Player * p1_;
+    Player * p2_;
+    //AI * p1_;
     QGraphicsScene *BuildGrid_;
     QGraphicsScene *BuildGrid_2;
     QGraphicsScene *BuildGraph_;
