@@ -120,22 +120,22 @@ private:
 
 };
 
-class Player : public QObject
-{
-    Q_OBJECT
-public:
-    Player(){player_type = 1;}
-    virtual void take_turn();
-    virtual int get_type(){return player_type;}
-    int player_type;
-    int turns;
-};
+//class Player : public QObject
+//{
+//    Q_OBJECT
+//public:
+//    Player(){player_type = 1;}
+//    virtual void take_turn();
+//    virtual int get_type(){return player_type;}
+//    int player_type;
+//    int turns;
+//};
 
-class AI: public Player
-{
-public:
-    AI(){player_type = 2;}
-    virtual void take_turn() override;
-};
+//class AI: public Player
+//{
+//public:
+//    AI(){player_type = 2;}
+//    virtual void take_turn() override;
+//};
 
 #endif // CELL_H
