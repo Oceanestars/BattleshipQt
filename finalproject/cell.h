@@ -120,6 +120,7 @@ private:
 
 };
 
+
 class Player : public QObject
 {
     Q_OBJECT
@@ -140,5 +141,6 @@ public:
     AI(){player_type = 2;turns=0;}
     virtual void set_turn(int x){if(x==1){turns += x;}}
 };
+
 
 #endif // CELL_H

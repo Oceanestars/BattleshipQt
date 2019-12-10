@@ -180,7 +180,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if(this->s==SquareType::Bomb){
             if(this->grid == 1){
                 this->set_color(QColor(255,255,255));
-                inv_b2++;
+                inv_b2++; //inventory
                 this->update();
             }
             else{

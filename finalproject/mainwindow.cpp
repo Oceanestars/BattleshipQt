@@ -18,6 +18,8 @@ access elements of its library.
 #include <QGraphicsItem>
 #include <QtWidgets>
 
+//special event if person has 5 points and has more points than the other
+//player (who is losing) gets two extra turn.
 
 /**
     Return nothing(constructor)
@@ -274,6 +276,8 @@ void MainWindow::on_restart_game_clicked()
             cells[i][j] = item;
             BuildGrid_->addItem(item);
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
+            connect(item, &Cell::bom, this, &MainWindow::Bomb);
+            connect(item, &Cell::torp, this, &MainWindow::Torpedo);
         }
     }
 
@@ -283,6 +287,8 @@ void MainWindow::on_restart_game_clicked()
             cells2[i][j] = item;
             BuildGrid_2->addItem(item);
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
+            connect(item, &Cell::bom, this, &MainWindow::Bomb);
+            connect(item, &Cell::torp, this, &MainWindow::Torpedo);
         }
     }
     ui->Uboat1->setEnabled(true);
@@ -314,6 +320,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else if(c->s == SquareType::Boat){
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -321,6 +328,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -328,6 +336,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -335,6 +344,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -342,6 +352,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             qDebug()<<"x2:"<<x;
             qDebug()<<"y2:"<<y;
@@ -353,6 +364,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells2[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -360,6 +372,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -367,6 +380,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -374,6 +388,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -381,6 +396,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             qDebug()<<"x2:"<<x;
             qDebug()<<"y2:"<<y;
@@ -395,6 +411,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -402,6 +419,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -409,6 +427,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
         }
         else{
@@ -417,6 +436,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells2[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -424,6 +444,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -431,6 +452,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
         }
     }
@@ -441,6 +463,8 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
+
             }
             temp = cells[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -448,6 +472,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -455,6 +480,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
         }
         else{
@@ -463,6 +489,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells2[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -470,6 +497,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -477,6 +505,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
         }
     }
@@ -487,6 +516,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -494,6 +524,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -501,6 +532,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
         }
         else{
@@ -509,6 +541,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells2[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -516,6 +549,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -523,6 +557,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
         }
     }
@@ -533,6 +568,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -540,6 +576,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -547,6 +584,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
         }
         else{
@@ -555,6 +593,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells2[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -562,6 +601,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -569,6 +609,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
         }
     }
@@ -579,6 +620,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -586,6 +628,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -593,6 +636,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -600,6 +644,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
         }
         else{
@@ -608,6 +653,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells2[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -615,6 +661,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -622,6 +669,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -629,6 +677,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
         }
     }
@@ -639,6 +688,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -646,6 +696,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -653,6 +704,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -660,6 +712,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
         }
         else{
@@ -668,6 +721,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells2[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -675,6 +729,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -682,6 +737,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -689,6 +745,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
         }
     }
@@ -699,6 +756,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -706,6 +764,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -713,6 +772,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -720,6 +780,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
         }
         else{
@@ -728,6 +789,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells2[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -735,6 +797,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y][x+1];
             if(temp->s != SquareType::Boat){
@@ -742,6 +805,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -749,6 +813,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
         }
     }
@@ -759,6 +824,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -766,6 +832,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -773,6 +840,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
             temp = cells[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -780,6 +848,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
         }
         else{
@@ -788,6 +857,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+
             }
             temp = cells2[y][x-1];
             if(temp->s != SquareType::Boat){
@@ -795,6 +865,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y+1][x];
             if(temp->s != SquareType::Boat){
@@ -802,6 +873,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
             temp = cells2[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -809,6 +881,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
         }
     }
@@ -824,7 +897,7 @@ void MainWindow::Torpedo(Cell *c){
     Cell * temp = new Cell(0,0,cell_width_/10, cell_height_/10,1);
     qDebug()<<"x:"<<x;
     qDebug()<<"y:"<<y;
-    if(x == 9){
+    if(y == 9){
         if(c->s != SquareType::Boat){
             c->set_color(QColor(255,255,255));
         }
@@ -839,6 +912,7 @@ void MainWindow::Torpedo(Cell *c){
             }
             else{
                 c->set_color(QColor(255,0,0));
+
             }
             temp = cells[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -846,6 +920,7 @@ void MainWindow::Torpedo(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score++;
             }
         }
         else{
@@ -854,6 +929,7 @@ void MainWindow::Torpedo(Cell *c){
             }
             else{
                 c->set_color(QColor(255,0,0));
+
             }
             temp = cells2[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -861,6 +937,7 @@ void MainWindow::Torpedo(Cell *c){
             }
             else{
                temp->set_color(QColor(255,0,0));
+               Cell::score2++;
             }
         }
     }
