@@ -85,7 +85,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //players
     if(RulesWindow::num_players == 1){
-        p1_ = new AI();
+        p3_ = new AI();
         p2_ = new Player();
 
     }
@@ -138,6 +138,17 @@ void MainWindow::HideCell(){
 void MainWindow::on_Done1_clicked()
 {
     ishidden1=true;
+    int t=0;
+    if(RulesWindow::num_players == 2){
+        p1_->Player::set_turn(1);
+        t = p1_->get_turns();
+    }
+    else{
+        p3_->AI::set_turn(1);
+        t = p3_->get_turns();
+    }
+    ui->turn_1->setText("Turns: "+QString::number(t));
+    this->update();
     HideCell();
     ui->Done1->setEnabled(false);
 }
@@ -150,7 +161,6 @@ void MainWindow::HideCell2(){
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
             cells2[i][j]->set_color(color);
-
         }
     }
     Cell::is_game2=true;
