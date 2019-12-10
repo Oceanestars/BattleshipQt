@@ -23,7 +23,7 @@ We have our class Cell.
 #include <QtWidgets>
 #include <QObject>
 
-enum class SquareType { Boat, Bomb, Torpedo,Water};
+enum class SquareType { Boat, Bomb, Torpedo, Water};
 
 class Cell : public QObject, public QGraphicsItem {
     Q_OBJECT
@@ -137,9 +137,14 @@ public:
 
 class AI: public Player
 {
+     SquareType s;
 public:
     AI(){player_type = 2;turns=0;}
     virtual void set_turn(int x){if(x==1){turns += x;}}
+    Cell *cells2[10][10];
+private:
+    void make_boat();
+
 };
 
 

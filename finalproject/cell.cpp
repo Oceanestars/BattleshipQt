@@ -243,3 +243,48 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
      Cell::clicked_button--;
 
 }
+
+void AI::make_boat(){
+
+    Cell * item = new Cell(0, 0, 300/10, 300/10,1);
+
+    int x = rand() % 10;
+    int y = rand() & 10;
+    item = cells2[x][y];
+    item->s = SquareType::Boat;
+    //U boat - horizontal 2 squares
+    if(y==0)
+    {
+       item = cells2[x][y+1];
+       item->s = SquareType::Boat;
+    }
+    else if (y==9)
+    {
+        item = cells2[x][y-1];
+        item->s = SquareType::Boat;
+    }
+
+    //Submarine - vertical 3 squares
+    int x2 = rand() % 10 ;
+    int y2 = rand() % 10 ;
+    while(x2 == x & y2 == y)
+    {
+         x2 = rand() % 10 ;
+         y2 = rand() % 10 ;
+
+    }
+    item = cells2[x2][y2];
+    item->s = SquareType::Boat;
+    if(x==0) //top row
+    {
+  //need if statement if there is already a boat above (or below)
+       item = cells2[x+1][y];
+       item->s = SquareType::Boat;
+    }
+    else if(x ==9){
+        item = cells2[x-1][y];
+        item->s = SquareType::Boat;
+    }
+
+
+}
