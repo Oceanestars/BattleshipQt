@@ -56,6 +56,7 @@ int Cell::inv_b1=0;
 int Cell::inv_b2=0;
 bool Cell::torp_mode = false;
 bool Cell::bomb_mode = false;
+bool Player::extra_turns = false;
 /**
  * Draws the outline for the cells so that we can contain our cells within a square.
  * @param nothing
@@ -142,6 +143,9 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //create another slot, if statement to figure out which mode we are in, set boat or hit boat
     //shift
     //qDebug()<<clicked_button;
+    if(is_game1 != true && is_game2 != true){
+        emit yes_clicked();
+    }
     if(Cell::clicked_button>0){
         qDebug()<<Cell::clicked_button;
 
@@ -180,7 +184,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if(this->s==SquareType::Bomb){
             if(this->grid == 1){
                 this->set_color(QColor(255,255,255));
-                inv_b2++; //inventory
+                inv_b2++;
                 this->update();
             }
             else{

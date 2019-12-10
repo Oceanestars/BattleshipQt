@@ -72,6 +72,10 @@ private slots:
 
     void on_Bomb_2_clicked();
 
+    void click();
+
+    void score_check();
+
 
 private:
     Ui::MainWindow *ui;

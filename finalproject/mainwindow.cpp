@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
             connect(item, &Cell::bom, this, &MainWindow::Bomb);
             connect(item, &Cell::torp, this, &MainWindow::Torpedo);
+            connect(item, &Cell::yes_clicked, this, &MainWindow::click);
         }
     }
 
@@ -72,6 +73,7 @@ MainWindow::MainWindow(QWidget *parent)
             connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
             connect(item, &Cell::bom, this, &MainWindow::Bomb);
             connect(item, &Cell::torp, this, &MainWindow::Torpedo);
+            connect(item, &Cell::yes_clicked, this, &MainWindow::click);
         }
     }
 
@@ -941,4 +943,83 @@ void MainWindow::Torpedo(Cell *c){
             }
         }
     }
+}
+
+void MainWindow::click()
+{
+    int t=0;
+    int t2=0;
+    if(RulesWindow::num_players == 2){
+        if(p1_->get_turns() > 0){
+            p1_->Player::set_turn(-1);
+            t = p1_->get_turns();
+            if(t == 0){
+                qDebug()<<"The value of t";
+                p2_->Player::set_turn(1);
+                qDebug()<<"second";
+                t2 = p2_->get_turns();
+                qDebug()<<"third";
+                ui->turn_2->setText("Turns: "+QString::number(t2));
+                qDebug()<<t;
+            }
+            ui->turn_1->setText("Turns: "+QString::number(t));
+        }
+        else if(p2_->get_turns() > 0){
+            p2_->Player::set_turn(-1);
+            t = p2_->get_turns();
+            if(p2_->get_turns() == 0){
+                p1_->Player::set_turn(1);
+                t2 = p1_->get_turns();
+                ui->turn_1->setText("Turns: "+QString::number(t2));
+            }
+            ui->turn_2->setText("Turns: "+QString::number(t));
+        }
+    }
+    else{
+        if(p3_->get_turns() > 0){
+            p3_->AI::set_turn(-1);
+            t = p3_->get_turns();
+            p2_->Player::set_turn(1);
+            t2 = p2_->get_turns();
+            ui->turn_2->setText("Turns: "+QString::number(t2));
+            ui->turn_1->setText("Turns: "+QString::number(t));
+        }
+        else if(p2_->get_turns() > 0){
+            p2_->Player::set_turn(-1);
+            t = p2_->get_turns();
+            if(p2_->get_turns() == 0){
+                p3_->Player::set_turn(1);
+                t2 = p3_->get_turns();
+                ui->turn_1->setText("Turns: "+QString::number(t2));
+            }
+            ui->turn_2->setText("Turns: "+QString::number(t));
+        }
+    }
+    this->update();
+}
+
+void MainWindow::score_check(){
+    int t;
+    if(Cell::score2 < 5 || Cell::score < 5){
+        return;
+    }
+    if(Cell::score2 > Cell::score && !Player::extra_turns && RulesWindow::num_players == 2){
+        p2_->set_turn(2);
+        t = p2_->get_turns();
+        ui->turn_2->setText("Turns: "+QString::number(t));
+        Player::extra_turns = true;
+    }
+    else if(Cell::score > Cell::score2 && !Player::extra_turns && RulesWindow::num_players == 2){
+        p1_->set_turn(2);
+        t = p1_->get_turns();
+        ui->turn_1->setText("Turns: "+QString::number(t));
+        Player::extra_turns = true;
+    }
+    else if(Cell::score2 > Cell::score && !Player::extra_turns && RulesWindow::num_players == 1){
+        p2_->set_turn(2);
+        t = p2_->get_turns();
+        ui->turn_2->setText("Turns: "+QString::number(t));
+        Player::extra_turns = true;
+    }
+    this->update();
 }

@@ -72,6 +72,8 @@ signals:
     void bom(Cell *);
     void torp(Cell *);
     void scorechanger(Cell *p);
+    void yes_clicked();
+    void check_score();
 
 private:
   int x_;
@@ -132,6 +134,7 @@ public:
     int get_turns(){return turns;}
     int player_type;
     int turns;
+    static bool extra_turns;
     Cell * hit;
 };
 
@@ -139,7 +142,7 @@ class AI: public Player
 {
 public:
     AI(){player_type = 2;turns=0;}
-    virtual void set_turn(int x){if(x==1){turns += x;}}
+    virtual void set_turn(int x){if((x==1 || x==-1) && turns < 2){turns += x;}}
 };
 
 
