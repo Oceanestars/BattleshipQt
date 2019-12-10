@@ -124,9 +124,11 @@ class Player : public QObject
 {
     Q_OBJECT
 public:
-    Player(){player_type = 1;}
-    virtual void take_turn();
+    Player(){player_type = 1;turns=0;}
+    virtual void take_turn(){turns--;}
+    virtual void set_turn(int x){turns += x;}
     virtual int get_type(){return player_type;}
+    virtual int get_turns(){return turns;}
     int player_type;
     int turns;
 };
@@ -134,8 +136,7 @@ public:
 class AI: public Player
 {
 public:
-    AI(){player_type = 2;}
-    virtual void take_turn() override;
+    AI(){player_type = 2;turns=0;}
 };
 
 #endif // CELL_H
