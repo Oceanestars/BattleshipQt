@@ -26,9 +26,11 @@ class RulesWindow : public QMainWindow
 public:
     explicit RulesWindow(QWidget *parent = nullptr);
     ~RulesWindow();
+    static int num_players;
 
 private slots:
     void on_two_player_clicked();
+    void on_one_player_clicked();
 
 private:
     Ui::RulesWindow *ui;

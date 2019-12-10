@@ -72,6 +72,7 @@ private slots:
 
     void on_Bomb_2_clicked();
 
+
 private:
     Ui::MainWindow *ui;
     Cell * cells[10][10];

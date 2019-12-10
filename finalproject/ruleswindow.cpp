@@ -45,12 +45,17 @@ RulesWindow::~RulesWindow()
     @return nothing,will hide the current ui(ruleswindow) and will emit a signal
 
 */
+int RulesWindow::num_players = 0;
 void RulesWindow::on_two_player_clicked()
 {
-
+    num_players = 2;
     this->hide();
     game.show();
+}
 
-
-
+void RulesWindow::on_one_player_clicked()
+{
+    num_players = 1;
+    this->hide();
+    game.show();
 }
