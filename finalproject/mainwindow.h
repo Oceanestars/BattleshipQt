@@ -38,6 +38,7 @@ public:
     ~MainWindow();
     static bool start_game;
     void AI_Boats();
+    void AI_Turn();
 
 private slots:
 
