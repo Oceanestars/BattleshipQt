@@ -5,7 +5,11 @@ Date: December 10 2019
 
 This is our mainwindow.cpp
 We are including QGraphicsScene, QGraphicsItem, QGraphicsView, QtWidget,and QDebug so we can
-access elements of its library.
+access elements of its library. We set up the main window and all of it's functionality, including a bar graph, and setting
+up a board for the computer player.
+Our game is battleship, but with hidden treasures such as bombs (which blow up four surrounding cells) and torpedos
+(which also hits the cell above the targeted cell). Players can either play against each other, or against and AI that will
+randomly attack squares on their board. At the end of each game a graph displays how many times each player has won a game.
 
 
 */
@@ -93,8 +97,12 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug()<<"Rulewindow:"<<RulesWindow::num_players;
 
 }
+//set the static bool to false initially
 bool MainWindow::start_game=false;
 
+/**
+ * Return nothing (deconstructor)
+ */
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -102,6 +110,7 @@ MainWindow::~MainWindow()
 
 /**
     Return nothing, slot for our uboat button
+    Once this has been pressed player 1 can put two squares on their grid for a uboat.
 
     @param nothing
     @return nothing
@@ -116,6 +125,7 @@ void MainWindow::on_Uboat1_clicked()
 
 /**
     Return nothing, slot for our submarine button
+    Once this has been pressed player 1 can put three squares on their grid for a submine.
 
     @param nothing
     @return nothing
@@ -129,6 +139,7 @@ void MainWindow::on_Submarine1_clicked()
 
 /**
     Return nothing, slot for our carrier button
+    Once this has been pressed player 1 can put five squares on their grid for a carrier.
 
     @param nothing
     @return nothing
@@ -142,6 +153,7 @@ void MainWindow::on_Carrier1_clicked()
 
 /**
     Return nothing, this will hide our boats and make them into "water"
+    Once all their boats have been set this hides the secret location of their boats so the other player doesn't sit
 
     @param nothing
     @return nothing
@@ -165,6 +177,7 @@ void MainWindow::HideCell(){
 
 /**
     Return nothing, slot for our done button
+    Once our done button is pressed the grid is hid and the done button is disabled
 
     @param nothing
     @return nothing
@@ -181,6 +194,7 @@ void MainWindow::on_Done1_clicked()
 
 /**
     Return nothing, this will hide our boats and make them into "water"
+    This hides the secret location of player 2's boats so the other player doesn't know where their opponent put boats
 
     @param nothing
     @return nothing
@@ -202,6 +216,7 @@ void MainWindow::HideCell2(){
 
 /**
     Return nothing, slot for our Uboat button
+    Once this has been pressed player 1 can put two squares on their grid for a uboat.
 
     @param nothing
     @return nothing
@@ -215,6 +230,7 @@ void MainWindow::on_Uboat2_clicked()
 
 /**
     Return nothing, slot for our Submarine button
+    Once this has been pressed player 1 can put three squares on their grid for a submarine.
 
     @param nothing
     @return nothing
@@ -228,6 +244,7 @@ void MainWindow::on_Submarine2_clicked()
 
 /**
     Return nothing, slot for our Carrier button
+    Once this has been pressed player 1 can put five squares on their grid for a carrier.
 
     @param nothing
     @return nothing
@@ -241,7 +258,9 @@ void MainWindow::on_Carrier2_clicked()
 
 /**
     Return nothing, slot for our done button
-
+    Once all boats are placed we press the done button to hide player 2's grid.
+    This is also where we create the different players. We do this here because player 2 will always press
+    a done button, but when player 1 is a computer they do not press the done button.
     @param nothing
     @return nothing
 
@@ -285,7 +304,7 @@ void MainWindow::on_Done2_clicked()
 
 /**
     Return nothing, slot for our torpedo button
-
+    Once the player 1 presses the torpedo button we change click mode to torpedo
     @param nothing
     @return nothing
 
@@ -297,7 +316,7 @@ void MainWindow::on_Torpedo_1_clicked()
 
 /**
     Return nothing, slot for our torpedo button for our second player
-
+ Once the player 2 presses the torpedo button we change click mode to torpedo
     @param nothing
     @return nothing
 
@@ -309,7 +328,7 @@ void MainWindow::on_Torpedo_2_clicked()
 
 /**
     Return nothing, slot for our bomb button
-
+    Once the player 1 presses the bomb button we change click mode to bomb
     @param nothing
     @return nothing
 
@@ -321,7 +340,7 @@ void MainWindow::on_Bomb_1_clicked()
 
 /**
     Return nothing, slot for our bomb button for the second player
-
+    Once the player 2 presses the bomb button we change click mode to bomb
     @param nothing
     @return nothing
 
@@ -334,7 +353,7 @@ void MainWindow::on_Bomb_2_clicked()
 /**
     Return nothing, function that changes both player's score
     as well as the inventory of their weapons and will
-    displayer the bar graph with the number of games each player has won.
+    display the bar graph with the number of games each player has won.
 
     @param nothing
     @return nothing
@@ -1408,7 +1427,8 @@ void MainWindow::click()
 
 /**
     Return nothing, score_check is a custom slot that .
-
+    This was meant to be used for another feature that would give a losing partner some extra turns.
+    Unfortunately we scrapped this feature because we couldn't quite make it work
     @param nothing
     @return nothing
 
@@ -1442,7 +1462,7 @@ void MainWindow::score_check(){
 /**
     Return nothing, this function is for the AI logic. It sets up its Uboat, Submarine, and Carrier
     randomly.
-
+    Once the boats have been placed the squares are hidden so the human player doesn't know where the AI placed all its boats
     @param nothing
     @return nothing
 
@@ -1600,7 +1620,9 @@ void MainWindow::AI_Boats(){
 
 /**
     Return nothing, this function takes care of making the AI take a turn.
-
+    The strategy is randomly hitting a cell that has not already been hit. If a boat is hit the score is updated.
+    If a bomb or a torpedo is hit they automatically go off in the cell they are hit. So there is not inventory for
+    the computer to have to deal with.
     @param nothing
     @return nothing
 

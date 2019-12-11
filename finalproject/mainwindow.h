@@ -1,11 +1,12 @@
 /**
 Abby Nay & Oceane Andreis
 Homework 5
-Date: November 20 2019
+Date: December 10 2019
 
 This is our mainwindow.h.
 We are including QGraphicsScene, QTimer, QGraphicsItem, QGraphicsView, QtWidget,and QDebug so we can
 access elements of its library.
+This is setting up the mainwindow elements and methods.
 
 */
 
