@@ -1,10 +1,11 @@
 /**
 Abby Nay & Oceane Andreis
 Homework 5
-Date: November 20 2019
+Date: December 10 2019
 
 This is our ruleswindow.cpp
-This will help us control the ruleswindow ui
+This will help us control the ruleswindow ui.
+We set up a game based on if there are two human players or one human player and one computer player.
 
 */
 
@@ -40,7 +41,7 @@ RulesWindow::~RulesWindow()
 
 /**
     Return nothing
-
+    This sets up our game for two real human players. We will start the game and show our board.
     @param nothing
     @return nothing,will hide the current ui(ruleswindow) and will emit a signal
 
@@ -56,6 +57,15 @@ void RulesWindow::on_two_player_clicked()
 
 }
 
+/**
+    Return nothing
+    This sets up our game for one real human player and one computer player. We will start the game and show our board.
+    This function also sets up our AI with a board full of secret boats. Thus, the AI's board is ready and hidden before the
+    other player even sees the game board.
+    @param nothing
+    @return nothing,will hide the current ui(ruleswindow) and will emit a signal
+
+*/
 void RulesWindow::on_one_player_clicked()
 {
     num_players = 1;
