@@ -37,6 +37,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     static bool start_game;
+    void AI_Boats();
 
 private slots:
 
@@ -95,7 +96,6 @@ private:
     void HideCell();
     void HideCell2();
     void WinnerBar();
-    void AI_Boats();
     bool ishidden1=false;
     bool ishidden2=false;
     bool torp1 = false;

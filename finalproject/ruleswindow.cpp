@@ -62,5 +62,6 @@ void RulesWindow::on_one_player_clicked()
     this->hide();
     game.show();
     MainWindow::start_game=true;
+    game.AI_Boats();
 
 }

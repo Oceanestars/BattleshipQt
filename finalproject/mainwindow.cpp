@@ -92,9 +92,10 @@ MainWindow::MainWindow(QWidget *parent)
     //players
 
     qDebug()<<"Rulewindow:"<<RulesWindow::num_players;
-    if(RulesWindow::num_players == 2){
-        this->AI_Boats();
-    }
+//    if(RulesWindow::num_players == 1){
+//        qDebug()<<"IS AI being called?";
+//        this->AI_Boats();
+//    }
 
 }
 bool MainWindow::start_game=false;
@@ -1198,8 +1199,10 @@ void MainWindow::score_check(){
 }
 
 void MainWindow::AI_Boats(){
-    Cell * item = new Cell(0, 0, 300/10, 300/10,1);
 
+    qDebug()<<"IS AI WORKING???????";
+    Cell * item = new Cell(0, 0, 300/10, 300/10,1);
+    ui->label->setText("AI");
     int x = rand() % 10;
     int y = rand() & 10;
     item = cells[y][x];
@@ -1321,6 +1324,7 @@ void MainWindow::AI_Boats(){
         }
     }
     HideCell();
+
     Cell::is_game1 = true;
     ishidden1=true;
     ui->Done1->setEnabled(false);

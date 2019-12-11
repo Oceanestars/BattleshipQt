@@ -140,7 +140,8 @@ public:
 
 class AI: public Player
 {
-     SquareType s;
+    Q_OBJECT
+    SquareType s;
 public:
     AI(){player_type = 2;turns=0;}
 
