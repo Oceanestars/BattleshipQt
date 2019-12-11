@@ -286,16 +286,17 @@ void MainWindow::on_Done2_clicked()
     if(RulesWindow::num_players == 2){
         p1_->Player::set_turn(1);
         t =  p1_->get_turns();
+        ui->turn_1->setText("Turns: "+QString::number(t));
     }
     else{
         p2_->Player::set_turn(1);
         p3_->AI::set_turn(0);
         t = p2_->get_turns();
         t3 = p3_->get_turns();
+        ui->turn_2->setText("Turns: "+QString::number(t));
+        ui->turn_1->setText("Turns: "+QString::number(t3));
     }
-    ui->turn_2->setText("Turns: "+QString::number(t));
-    ui->turn_1->setText("Turns: "+QString::number(t3));
-    this->update();
+
     ishidden2=true;
     HideCell2();
     ui->Done2->setEnabled(false);
