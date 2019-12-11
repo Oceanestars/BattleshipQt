@@ -1,7 +1,7 @@
 /**
 Abby Nay & Oceane Andreis
 Homework 5
-Date: November 20 2019
+Date: December 10 2019
 
 This is our mainwindow.cpp
 We are including QGraphicsScene, QGraphicsItem, QGraphicsView, QtWidget,and QDebug so we can
@@ -18,11 +18,9 @@ access elements of its library.
 #include <QGraphicsItem>
 #include <QtWidgets>
 
-//special event if person has 5 points and has more points than the other
-//player (who is losing) gets two extra turn.
 
 /**
-    Return nothing(constructor)
+    Return nothing(constructor with our grid and bar)
 
     @param QWidget
     @return nothing, Sets up the grid, shows the menu,
@@ -96,11 +94,19 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 bool MainWindow::start_game=false;
+
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+/**
+    Return nothing, slot for our uboat button
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Uboat1_clicked()
 {
     Cell::clicked_button=2;
@@ -108,18 +114,39 @@ void MainWindow::on_Uboat1_clicked()
 
 }
 
+/**
+    Return nothing, slot for our submarine button
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Submarine1_clicked()
 {
     Cell::clicked_button=3;
     ui->Submarine1->setEnabled(false);
 }
 
+/**
+    Return nothing, slot for our carrier button
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Carrier1_clicked()
 {
     Cell::clicked_button=5;
     ui->Carrier1->setEnabled(false);
 }
 
+/**
+    Return nothing, this will hide our boats and make them into "water"
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::HideCell(){
 
     QColor color(255, 0, 0);
@@ -136,6 +163,13 @@ void MainWindow::HideCell(){
 
 }
 
+/**
+    Return nothing, slot for our done button
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Done1_clicked()
 {
     HideCell();
@@ -144,6 +178,14 @@ void MainWindow::on_Done1_clicked()
 }
 
 // Second Player
+
+/**
+    Return nothing, this will hide our boats and make them into "water"
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::HideCell2(){
 
     QColor color(255, 0, 0);
@@ -158,25 +200,52 @@ void MainWindow::HideCell2(){
 
 }
 
+/**
+    Return nothing, slot for our Uboat button
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Uboat2_clicked()
 {
     Cell::clicked_button=2;
     ui->Uboat2->setEnabled(false);
 }
 
+/**
+    Return nothing, slot for our Submarine button
 
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Submarine2_clicked()
 {
     Cell::clicked_button=3;
     ui->Submarine2->setEnabled(false);
 }
 
+/**
+    Return nothing, slot for our Carrier button
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Carrier2_clicked()
 {
     Cell::clicked_button=5;
     ui->Carrier2->setEnabled(false);
 }
 
+/**
+    Return nothing, slot for our done button
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Done2_clicked()
 {
     int t3 = 0;
@@ -213,23 +282,64 @@ void MainWindow::on_Done2_clicked()
     ui->Done2->setEnabled(false);
 
 }
+
+/**
+    Return nothing, slot for our torpedo button
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Torpedo_1_clicked()
 {
     Cell::torp_mode = true;
 }
 
+/**
+    Return nothing, slot for our torpedo button for our second player
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Torpedo_2_clicked()
 {
     Cell::torp_mode=true;
 }
+
+/**
+    Return nothing, slot for our bomb button
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Bomb_1_clicked()
 {
     Cell::bomb_mode = true;
 }
+
+/**
+    Return nothing, slot for our bomb button for the second player
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_Bomb_2_clicked()
 {
     Cell::bomb_mode = true;
 }
+
+/**
+    Return nothing, function that changes both player's score
+    as well as the inventory of their weapons and will
+    displayer the bar graph with the number of games each player has won.
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::ChangeScore(){
 
     ui->ScorePlayer1->display(Cell::score);
@@ -242,6 +352,15 @@ void MainWindow::ChangeScore(){
 
 }
 
+/**
+    Return nothing, this function displays how many games each players
+    has won in the bar graph and displays it in the labels. It also creates
+    a pop up window with the winner in it.
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::WinnerBar(){
 
     if(Cell::score==10){
@@ -280,6 +399,15 @@ void MainWindow::WinnerBar(){
 
 }
 
+/**
+    Return nothing, slot for our restart button, this will reset
+    everything for our two player mode game and for our Ai mode.
+    Both will clear the grid and reset the values.
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::on_restart_game_clicked()
 {
     if(RulesWindow::num_players==2){
@@ -369,6 +497,15 @@ void MainWindow::on_restart_game_clicked()
 
 }
 
+/**
+    Return nothing, function that contains our bomb logic and location
+    When our bomb is detonated it will hit the cell above, below, to the left,
+    and to the right. Our score will change if we've hit a boat.
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::Bomb(Cell *c){
     int x = c->get_x();
     int y = c->get_y();
@@ -1110,6 +1247,15 @@ void MainWindow::Bomb(Cell *c){
     this->ChangeScore();
 }
 
+/**
+    Return nothing, function for our torpedo weapon. Our torpedo will hit the
+    cell you pick and the cell above it. It will change the score accordingly.
+    It'll increase the score if you've hit a boat.
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::Torpedo(Cell *c){
     int x = c->get_x();
     int y = c->get_y();
@@ -1187,6 +1333,15 @@ void MainWindow::Torpedo(Cell *c){
     this->ChangeScore();
 }
 
+/**
+    Return nothing, click is a custom slot that will help keep track
+    of the turns. So everytime a player click the other window their turn
+    is updated.
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::click()
 {
 
@@ -1251,6 +1406,13 @@ void MainWindow::click()
 
 }
 
+/**
+    Return nothing, score_check is a custom slot that .
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::score_check(){
     int t;
     if(Cell::score2 < 5 && Cell::score < 5){
@@ -1277,6 +1439,14 @@ void MainWindow::score_check(){
     this->update();
 }
 
+/**
+    Return nothing, this function is for the AI logic. It sets up its Uboat, Submarine, and Carrier
+    randomly.
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::AI_Boats(){
 
 
@@ -1428,6 +1598,13 @@ void MainWindow::AI_Boats(){
     ui->Done1->setEnabled(false);
 }
 
+/**
+    Return nothing, this function takes care of making the AI take a turn.
+
+    @param nothing
+    @return nothing
+
+*/
 void MainWindow::AI_Turn(){
     qDebug()<<"do we get here? pt 2";
     int x = rand() % 10;
