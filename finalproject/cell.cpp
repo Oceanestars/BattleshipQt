@@ -144,7 +144,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //shift
     //qDebug()<<clicked_button;
     if(is_game1 == true && is_game2 == true){// is game = happens after done
-        qDebug()<<"Yes emitted";
+//        qDebug()<<"Yes emitted";
         emit yes_clicked();
 
     }

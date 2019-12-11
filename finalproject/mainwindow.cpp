@@ -274,6 +274,7 @@ void MainWindow::WinnerBar(){
 
 void MainWindow::on_restart_game_clicked()
 {
+    if(RulesWindow::num_players==2){
     BuildGrid_->clear();
     BuildGrid_2->clear();
 
@@ -321,6 +322,40 @@ void MainWindow::on_restart_game_clicked()
     ui->Carrier2->setEnabled(true);
     ui->Done1->setEnabled(true);
     ui->Done2->setEnabled(true);
+    }
+    else{
+        //BuildGrid_->clear();
+        BuildGrid_2->clear();
+
+        AI_Boats();
+        Cell::score=0;
+        Cell::score2=0;
+        Cell::inv_t2=0;
+        Cell::inv_t1=0;
+        Cell::inv_b1=0;
+        Cell::inv_b2=0;
+        Cell::is_game1=false;
+        Cell::is_game2=false;
+
+        ui->turn_1->setText("Turns: "+QString::number(0));
+        ui->turn_2->setText("Turns: "+QString::number(0));
+
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 10; j++) {
+                Cell * item = new Cell(j, i, cell_width_/10, cell_height_/10,2);
+                cells2[i][j] = item;
+                BuildGrid_2->addItem(item);
+                connect(item, &Cell::scorechanger, this, &MainWindow::ChangeScore);
+                connect(item, &Cell::bom, this, &MainWindow::Bomb);
+                connect(item, &Cell::torp, this, &MainWindow::Torpedo);
+                connect(item, &Cell::yes_clicked, this, &MainWindow::click);
+            }
+        }
+        ui->Uboat2->setEnabled(true);
+        ui->Submarine2->setEnabled(true);
+        ui->Carrier2->setEnabled(true);
+        ui->Done2->setEnabled(true);
+   }
 
 }
 
@@ -1200,11 +1235,13 @@ void MainWindow::score_check(){
 
 void MainWindow::AI_Boats(){
 
-    qDebug()<<"IS AI WORKING???????";
+
     ui->label->setText("AI");
     int x = rand() % 10;
-    int y = rand() & 10;
+    int y = rand() % 10;
+
     cells[y][x]->s = SquareType::Boat;
+     qDebug()<<"Original y:"<<y<<"x:"<<x;
     //Carrier - vertical 5 squares
     if(y>=4)
     {
@@ -1212,6 +1249,10 @@ void MainWindow::AI_Boats(){
        cells[y-2][x]->s = SquareType::Boat;
        cells[y-3][x]->s = SquareType::Boat;
        cells[y-4][x]->s = SquareType::Boat;
+       qDebug()<<"y:"<<y-1<<"x:"<<x;
+       qDebug()<<"y:"<<y-2<<"x:"<<x;
+       qDebug()<<"y:"<<y-3<<"x:"<<x;
+       qDebug()<<"y:"<<y-4<<"x:"<<x;
     }
     else
     {
@@ -1219,6 +1260,10 @@ void MainWindow::AI_Boats(){
         cells[y+2][x]->s=SquareType::Boat;
         cells[y+3][x]->s=SquareType::Boat;
         cells[y+4][x]->s=SquareType::Boat;
+        qDebug()<<"y:"<<y+1<<"x:"<<x;
+        qDebug()<<"y:"<<y+2<<"x:"<<x;
+        qDebug()<<"y:"<<y+3<<"x:"<<x;
+        qDebug()<<"y:"<<y+4<<"x:"<<x;
     }
 
     //Submarine - horizontal 3 squares
@@ -1231,15 +1276,15 @@ void MainWindow::AI_Boats(){
 
     }
     cells[y2][x2]->s = SquareType::Boat;
-    qDebug()<<"y2:"<<y2<<"x2:"<<x2;
-    if(x<2) // left most columns
+    qDebug()<<"Original y2:"<<y2<<"x2:"<<x2;
+    if(x<=2) // left most columns
     {
   //if statement if there is already a boat to the right
        if(cells[y2][x2+1]->s != SquareType::Boat && cells[y2][x2+2]->s != SquareType::Boat){
            cells[y2][x2+1]->s = SquareType::Boat;
            cells[y2][x2+2]->s = SquareType::Boat;
            qDebug()<<"are we in here?";
-//           qDebug()<<"y22:"<<y2<<"x22:"<<x2;
+           qDebug()<<"y22:"<<y2<<"x22:"<<x2;
        }
        else if(y2<=7){
            cells[y2+1][x2]->s = SquareType::Boat;
@@ -1258,11 +1303,15 @@ void MainWindow::AI_Boats(){
             cells[y2][x2-1]->s = SquareType::Boat;
             cells[y2][x2-2]->s = SquareType::Boat;
             qDebug()<<"are we in here?444";
+            qDebug()<<"y24:"<<y2<<"x24:"<<x2-1;
+            qDebug()<<"y24:"<<y2<<"x24:"<<x2-2;
         }
         else if(y<=7){
             cells[y2+1][x2]->s = SquareType::Boat;
             cells[y2+2][x2]->s = SquareType::Boat;
             qDebug()<<"are we in here?5555";
+            qDebug()<<"y25:"<<y2+1<<"x25:"<<x2;
+            qDebug()<<"y25:"<<y2+2<<"x25:"<<x2;
         }
         else{
             cells[y2-1][x2]->s = SquareType::Boat;
@@ -1279,29 +1328,36 @@ void MainWindow::AI_Boats(){
          y3 = rand() % 10 ;
 
     }
-    cells[x3][y3]->s = SquareType::Boat;
+    cells[y3][x3]->s = SquareType::Boat;
+    qDebug()<<"UBOAT OG y:"<<y3<<"x:"<<x3;
+
     //check the cell above first
     if(y>0){
         //cell above first
         if(cells[y3-1][x3]->s != SquareType::Boat){
             cells[y3-1][x3]->s = SquareType::Boat;
+            qDebug()<<"y:"<<y3-1<<"x:"<<x3;
         }
         else if(y!=9){
             //cell below
             if(cells[y3+1][x3]->s != SquareType::Boat){
                 cells[y3+1][x3]->s = SquareType::Boat;
+                qDebug()<<" y:"<<y3+1<<"x:"<<x3;
+
             }
         }
         else if(x!=9){
             //cell right
             if(cells[y3][x3+1]->s != SquareType::Boat){
                 cells[y3][x3+1]->s = SquareType::Boat;
+                qDebug()<<" y:"<<y3<<"x:"<<x3+1;
             }
         }
         else if(x!=0){
             //cell left
             if(cells[y3][x3-1]->s != SquareType::Boat){
                 cells[y3][x3-1]->s = SquareType::Boat;
+                qDebug()<<" y:"<<y3<<"x:"<<x3-1;
             }
         }
     }
