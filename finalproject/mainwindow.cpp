@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 //    Grid
+    srand(time(NULL));
     BuildGrid_ = new QGraphicsScene;
     QGraphicsView * grid_view = ui->p1_screen;
     grid_view->setScene(BuildGrid_);
@@ -182,6 +183,7 @@ void MainWindow::on_Carrier2_clicked()
 
 void MainWindow::on_Done2_clicked()
 {
+    int t3 = 0;
     if (MainWindow::start_game){
         qDebug()<<"Try start game";
         if(RulesWindow::num_players == 2)
@@ -202,10 +204,13 @@ void MainWindow::on_Done2_clicked()
         t =  p1_->get_turns();
     }
     else{
-        p3_->AI::set_turn(1);
-        t = p3_->get_turns();
+        p2_->Player::set_turn(1);
+        p3_->AI::set_turn(0);
+        t = p2_->get_turns();
+        t3 = p3_->get_turns();
     }
-    ui->turn_1->setText("Turns: "+QString::number(t));
+    ui->turn_2->setText("Turns: "+QString::number(t));
+    ui->turn_1->setText("Turns: "+QString::number(t3));
     this->update();
     ishidden2=true;
     HideCell2();
@@ -377,6 +382,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else if(c->s == SquareType::Boat){
                c->set_color(QColor(255,0,0));
+               Cell::score++;
 
             }
             temp = cells[y][x-1];
@@ -386,7 +392,6 @@ void MainWindow::Bomb(Cell *c){
             else{
                if(temp->get_color()!= QColor(255, 0, 0)){
                temp->set_color(QColor(255,0,0));
-
                Cell::score++;
                }
             }
@@ -397,7 +402,6 @@ void MainWindow::Bomb(Cell *c){
             else{
                if(temp->get_color()!= QColor(255, 0, 0)){
                temp->set_color(QColor(255,0,0));
-
                Cell::score++;
                }
             }
@@ -433,6 +437,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score2++;
 
             }
             temp = cells2[y][x-1];
@@ -491,7 +496,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
-
+               Cell::score++;
             }
             temp = cells[y-1][x];
             if(temp->s != SquareType::Boat){
@@ -522,6 +527,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score2++;
 
             }
             temp = cells2[y-1][x];
@@ -555,6 +561,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score++;
 
 
             }
@@ -587,6 +594,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score2++;
 
             }
             temp = cells2[y+1][x];
@@ -620,6 +628,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score++;
 
             }
             temp = cells[y+1][x];
@@ -651,6 +660,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score2++;
 
             }
             temp = cells2[y+1][x];
@@ -684,6 +694,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score++;
 
             }
             temp = cells[y-1][x];
@@ -715,6 +726,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score2++;
 
             }
             temp = cells2[y-1][x];
@@ -748,6 +760,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score++;
 
             }
             temp = cells[y-1][x];
@@ -790,6 +803,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score2++;
 
             }
             temp = cells2[y-1][x];
@@ -834,6 +848,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score++;
 
             }
             temp = cells[y][x-1];
@@ -876,6 +891,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score2++;
 
             }
             temp = cells2[y][x-1];
@@ -920,6 +936,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score++;
 
             }
             temp = cells[y][x-1];
@@ -962,6 +979,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score2++;
 
             }
             temp = cells2[y][x-1];
@@ -1006,6 +1024,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score++;
 
             }
             temp = cells[y][x-1];
@@ -1047,6 +1066,7 @@ void MainWindow::Bomb(Cell *c){
             }
             else{
                c->set_color(QColor(255,0,0));
+               Cell::score2++;
 
             }
             temp = cells2[y][x-1];
@@ -1082,6 +1102,7 @@ void MainWindow::Bomb(Cell *c){
             }
         }
     }
+    this->ChangeScore();
 }
 
 void MainWindow::Torpedo(Cell *c){
@@ -1095,11 +1116,23 @@ void MainWindow::Torpedo(Cell *c){
     qDebug()<<"x:"<<x;
     qDebug()<<"y:"<<y;
     if(y == 9){
-        if(c->s != SquareType::Boat){
-            c->set_color(QColor(255,255,255));
+        if(c->grid == 1){
+            if(c->s != SquareType::Boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+                c->set_color(QColor(255,0,0));
+                Cell::score++;
+            }
         }
         else{
-            c->set_color(QColor(255,0,0));
+            if(c->s != SquareType::Boat){
+                c->set_color(QColor(255,255,255));
+            }
+            else{
+                c->set_color(QColor(255,0,0));
+                Cell::score2++;
+            }
         }
     }
     else{
@@ -1109,6 +1142,7 @@ void MainWindow::Torpedo(Cell *c){
             }
             else{
                 c->set_color(QColor(255,0,0));
+                Cell::score++;
 
             }
             temp = cells[y-1][x];
@@ -1129,6 +1163,7 @@ void MainWindow::Torpedo(Cell *c){
             }
             else{
                 c->set_color(QColor(255,0,0));
+                Cell::score2++;
 
             }
             temp = cells2[y-1][x];
@@ -1144,6 +1179,7 @@ void MainWindow::Torpedo(Cell *c){
             }
         }
     }
+    this->ChangeScore();
 }
 
 void MainWindow::click()
@@ -1185,6 +1221,8 @@ void MainWindow::click()
     }
     else{ //AI Mode
         if(p3_->get_turns() > 0){
+            qDebug()<<"do we get here?";
+            this->AI_Turn();
             p3_->AI::set_turn(-1);
             t = p3_->get_turns();
             p2_->Player::set_turn(1);
@@ -1201,6 +1239,9 @@ void MainWindow::click()
                 ui->turn_1->setText("Turns: "+QString::number(t2));
             }
             ui->turn_2->setText("Turns: "+QString::number(t));
+            this->update();
+            this->AI_Turn();
+            //this->click();
         }
     }
     this->update();
@@ -1380,4 +1421,47 @@ void MainWindow::AI_Boats(){
     Cell::is_game1 = true;
     ishidden1=true;
     ui->Done1->setEnabled(false);
+}
+
+void MainWindow::AI_Turn(){
+    qDebug()<<"do we get here? pt 2";
+    int x = rand() % 10;
+    int y = rand() % 10;
+    while(cells2[y][x]->get_color() == QColor(255,255,255) || cells2[y][x]->get_color() == QColor(255,0,0)){
+        x = rand() % 10;
+        y = rand() & 10;
+    }
+    if(cells2[y][x]->s==SquareType::Boat){
+        qDebug()<<"do we get here? pt 4";
+        cells2[y][x]->set_color(QColor(255,0,0));
+        cells2[y][x]->is_hit = true;
+        Cell::score2++;
+        this->update();
+        this->ChangeScore();
+    }
+    if(cells2[y][x]->s==SquareType::Bomb){
+        qDebug()<<"do we get here? pt 5";
+        cells2[y][x]->set_color(QColor(255,255,255));
+        this->Bomb(cells2[y][x]);
+        this->update();
+    }
+    if(cells2[y][x]->s==SquareType::Torpedo){
+        qDebug()<<"do we get here? pt 6";
+        cells2[y][x]->set_color(QColor(255,255,255));
+        this->Torpedo(cells2[y][x]);
+        this->update();
+    }
+    else if (cells2[y][x]->s==SquareType::Water){
+        qDebug()<<"do we get here? pt 7";
+        cells2[y][x]->set_color(QColor(255,255,255));
+        this->update();
+    }
+    p3_->set_turn(-1);
+    int t = p3_->get_turns();
+    ui->turn_1->setText("Turns: "+QString::number(t));
+    p2_->set_turn(1);
+    int t2 = p2_->get_turns();
+    ui->turn_2->setText("Turns: "+QString::number(t2));
+    this->update();
+
 }
