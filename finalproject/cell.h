@@ -2,13 +2,15 @@
 /**
 Abby Nay & Oceane Andreis
 Homework 5
-Date: November 20 2019
+Date: December 10 2019
 
 This is our cell.h.
 We are including QGraphicsScene, QMainWindow, QGraphicsItem, QGraphicsView, QColor, QtWidget,and QDebug so we can
 access elements of its library.
-We have our class Cell.
-
+We have our class Cell which populates our grids in the main window.
+We also have a bar class to keep track of winners and losers and display a bar graph of wins at the end of each game.
+Finally, we have a factory design and inheritance of different types of players. This way we can keep track of turns and
+get the AI to play the game on their own eventually.
 */
 
 

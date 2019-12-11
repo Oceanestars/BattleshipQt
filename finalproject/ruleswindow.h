@@ -1,7 +1,7 @@
 /**
 Abby Nay & Oceane Andreis
 Homework 5
-Date: November 20 2019
+Date: December 10 2019
 
 This is our ruleswindow.h.
 We have a slot for our button

@@ -1,12 +1,14 @@
 /**
 Abby Nay & Oceane Andreis
 Homework 5
-Date: November 20 2019
+Date: December 10 2019
 
 This is our cell.cpp.
 We are including QGraphicsScene, QGraphicsItem, QGraphicsView, QtWidget,and QDebug so we can
 access elements of its library.
 We have implemented our class Cell to create the grid.
+We also have a class (Factory design) with players being either AI or human that are created here.
+We also have a class Bar to keep track of which players win over time and can plot them on a bar graph in the right corner of our board.
 
 */
 
@@ -23,7 +25,12 @@ We have implemented our class Cell to create the grid.
 
 
 /**
-Constructor
+    Return nothing(constructor)
+    We create a cell that is assigned treasures such as bombs (5% probability) or torpedos (10% probability) that
+    will be placed on our board.
+    @param int x, int y, int width, int height, int g (which grid the cell belongs to (1 or 2)
+    @return nothing
+
 */
 Cell::Cell(int x, int y, int width, int height, int g){
     QColor color(255, 0, 0);
@@ -45,6 +52,11 @@ Cell::Cell(int x, int y, int width, int height, int g){
         s=SquareType::Water;
     }
 }
+
+/**
+ * Here we are initializing all the static variables from Cell and Player that we will want to use to keep track of scores
+ * and turns.
+ */
 int Cell::clicked_button=0;
 int Cell::score=0;
 int Cell::score2=0;
@@ -57,6 +69,7 @@ int Cell::inv_b2=0;
 bool Cell::torp_mode = false;
 bool Cell::bomb_mode = false;
 bool Player::extra_turns = false;
+
 /**
  * Draws the outline for the cells so that we can contain our cells within a square.
  * @param nothing
@@ -80,7 +93,7 @@ QPainterPath Cell::shape() const
 
 /**
  * Takes in graphics parameters to paint the cell the color we have assigned it in the constructor.
- * This also repaints our cells when they die/repopulate.
+ * This also repaints our cells when they are hit.
  * @param painter
  * @param option
  * @param widget
@@ -98,7 +111,14 @@ void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setBrush(b);
 }
 
-
+/**
+ * Returns nothing (constructor)
+ * Takes in a height, x, and y coordinates to create an instance of a bar object. This will be used
+ * to create a bar graph of which players have won games over time.
+ * @param x
+ * @param y
+ * @param h
+ */
 Bar::Bar(const int x, const int y, int h) {
 
     x_ = x;
@@ -107,12 +127,18 @@ Bar::Bar(const int x, const int y, int h) {
     color_ = "white";
 
 }
-
+/**
+ * Creates the rectangle we have in our bar graph.
+ * @return  the rectangle
+ */
 QRectF Bar::boundingRect() const
 {
     return QRectF(x_, y_, width_, height_);
 }
-
+/**
+ * Draws the shape of the rectangle we use in our bar graph.
+ * @return the shape of the rectangle
+ */
 QPainterPath Bar::shape() const
 {
     QPainterPath path;
@@ -121,6 +147,12 @@ QPainterPath Bar::shape() const
 }
 
 //bar paint using QBrush
+/**
+ * Here we just set the color of the bar we are using in our graph. We paint it to our ui.
+ * @param painter
+ * @param option
+ * @param widget
+ */
 void Bar::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
@@ -136,7 +168,15 @@ void Bar::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
 
 
 /**
-
+ * When we left click and the game has not started yet, we want to make sure each click sets up a square that will
+ * be a player's boats. Once all boats have been placed the game mode changes to true and we can click to hit the other
+ * person's squares.
+ * Once we are in game mode if we hit a boat the player's score is increased and the cell turns red. If they hit a
+ * square with a bomb or a torpedo they get those items added to their inventory.
+ * If a person has pressed their torpedo or bomb button then the click mode is changed and the torpedo and bomb functions are
+ * called on the cells we just clicked on.
+ * If a cell with only water on it is clicked the cell turns white.
+ * @param event
  */
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
