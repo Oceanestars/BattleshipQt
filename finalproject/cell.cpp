@@ -166,8 +166,9 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     }
   }
+     qDebug()<<"Can we get to here?1111"<<is_game1<<"space"<<is_game2;
     if(event->button() == Qt::LeftButton && is_game1==true && is_game2==true){
-        //qDebug()<<"Can we get to here?";
+        qDebug()<<"Can we get to here?";
         if(this->s==SquareType::Boat){
             this->set_color(QColor(255,0,0));
             this->is_hit = true;

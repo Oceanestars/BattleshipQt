@@ -93,10 +93,6 @@ MainWindow::MainWindow(QWidget *parent)
     //players
 
     qDebug()<<"Rulewindow:"<<RulesWindow::num_players;
-//    if(RulesWindow::num_players == 1){
-//        qDebug()<<"IS AI being called?";
-//        this->AI_Boats();
-//    }
 
 }
 bool MainWindow::start_game=false;
@@ -132,7 +128,7 @@ void MainWindow::HideCell(){
         for(int j = 0; j < 10; j++) {
 
             cells[i][j]->set_color(color);
-//            qDebug()<<"Hello";
+
         }
     }
     Cell::is_game1=true;
@@ -242,16 +238,11 @@ void MainWindow::ChangeScore(){
     ui->torpedo_1->setText(QString::number(Cell::inv_t1));
     ui->bomb_2->setText(QString::number(Cell::inv_b2));
     ui->bomb_1->setText(QString::number(Cell::inv_b1));
-//        qDebug()<<"ScoreFinal:"<<Cell::score;
-//        qDebug()<<"ScoreFinal2:"<<Cell::score2;
-
-        WinnerBar();
+    WinnerBar();
 
 }
 
 void MainWindow::WinnerBar(){
-
-
 
     if(Cell::score==10){
          Gamescore1+=10;
@@ -262,6 +253,11 @@ void MainWindow::WinnerBar(){
                 tr("The winner is Player 2") );
         bars_.push_back(first_bar);
         BuildGraph_->addItem(first_bar);
+        ui->gamewon1->setText("Player 1: "+ QString::number(Gamescore2/10));
+        ui->gamewon2->setText("Player 2: "+ QString::number(Gamescore1/10));
+        if(RulesWindow::num_players==1){
+            ui->gamewon1->setText("AI: "+ QString::number(Gamescore2/10));
+        }
 
     }
     else if(Cell::score2==10){
@@ -273,6 +269,13 @@ void MainWindow::WinnerBar(){
                 tr("The winner is Player 1") );
         bars_.push_back(second_bar);
         BuildGraph_->addItem(second_bar);
+        ui->gamewon1->setText("Player 1: "+ QString::number(Gamescore2/10));
+        ui->gamewon2->setText("Player 2: "+ QString::number(Gamescore1/10));
+        if(RulesWindow::num_players==1){
+            ui->gamewon1->setText("AI: "+ QString::number(Gamescore2/10));
+        }
+
+
     }
 
 }
@@ -305,6 +308,7 @@ void MainWindow::on_restart_game_clicked()
             connect(item, &Cell::bom, this, &MainWindow::Bomb);
             connect(item, &Cell::torp, this, &MainWindow::Torpedo);
             connect(item, &Cell::yes_clicked, this, &MainWindow::click);
+            connect(item, &Cell::check_score, this, &MainWindow::score_check);
         }
     }
 
@@ -317,6 +321,7 @@ void MainWindow::on_restart_game_clicked()
             connect(item, &Cell::bom, this, &MainWindow::Bomb);
             connect(item, &Cell::torp, this, &MainWindow::Torpedo);
             connect(item, &Cell::yes_clicked, this, &MainWindow::click);
+            connect(item, &Cell::check_score, this, &MainWindow::score_check);
         }
     }
     ui->Uboat1->setEnabled(true);
@@ -339,7 +344,7 @@ void MainWindow::on_restart_game_clicked()
         Cell::inv_t1=0;
         Cell::inv_b1=0;
         Cell::inv_b2=0;
-        Cell::is_game1=false;
+        Cell::is_game1=true;
         Cell::is_game2=false;
 
         ui->turn_1->setText("Turns: "+QString::number(0));
@@ -1188,8 +1193,6 @@ void MainWindow::click()
     int t=0;
     int t2=0;
 
-//qDebug()<<"p1 debug:"<<p1_->get_turns();
-//qDebug()<<"p2 debug:"<<p2_->get_turns();
 
     if(RulesWindow::num_players == 2){
 
@@ -1278,6 +1281,7 @@ void MainWindow::AI_Boats(){
 
 
     ui->label->setText("AI");
+    ui->gamewon1->setText("AI: ");
     int x = rand() % 10;
     int y = rand() % 10;
 
@@ -1416,9 +1420,10 @@ void MainWindow::AI_Boats(){
             cells[y3][x3-1]->s = SquareType::Boat;
         }
     }
-    HideCell();
 
-    Cell::is_game1 = true;
+ Cell::is_game1 = true;
+
+    HideCell();
     ishidden1=true;
     ui->Done1->setEnabled(false);
 }

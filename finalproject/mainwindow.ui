@@ -363,7 +363,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;U - Boat = Click 2 squares&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Submarine = Cick 3 squares&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Carrier = Click 5 squares&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;(You can only add square vertically or horizontally &amp;amp; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;click done after you've chosen your boats)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;U - Boat = Click 2 squares&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Submarine = Cick 3 squares&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Carrier = Click 5 squares&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;(Please add squares vertically or horizontally &amp;amp; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;click done after you've chosen your boats)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="Done1">
@@ -444,6 +444,32 @@
      <string>Turns: 0</string>
     </property>
    </widget>
+   <widget class="QLabel" name="gamewon1">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>460</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Player 1: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="gamewon2">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>510</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Player 2: </string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -451,7 +477,7 @@
      <x>0</x>
      <y>0</y>
      <width>901</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
