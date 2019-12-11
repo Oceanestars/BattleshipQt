@@ -95,6 +95,7 @@ private:
     void HideCell();
     void HideCell2();
     void WinnerBar();
+    void AI_Boats();
     bool ishidden1=false;
     bool ishidden2=false;
     bool torp1 = false;

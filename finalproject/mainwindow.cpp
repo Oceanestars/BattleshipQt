@@ -53,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
             connect(item, &Cell::bom, this, &MainWindow::Bomb);
             connect(item, &Cell::torp, this, &MainWindow::Torpedo);
             connect(item, &Cell::yes_clicked, this, &MainWindow::click);
+            connect(item, &Cell::check_score, this, &MainWindow::score_check);
         }
     }
 
@@ -74,6 +75,7 @@ MainWindow::MainWindow(QWidget *parent)
             connect(item, &Cell::bom, this, &MainWindow::Bomb);
             connect(item, &Cell::torp, this, &MainWindow::Torpedo);
             connect(item, &Cell::yes_clicked, this, &MainWindow::click);
+            connect(item, &Cell::check_score, this, &MainWindow::score_check);
         }
     }
 
@@ -90,6 +92,9 @@ MainWindow::MainWindow(QWidget *parent)
     //players
 
     qDebug()<<"Rulewindow:"<<RulesWindow::num_players;
+    if(RulesWindow::num_players == 2){
+        this->AI_Boats();
+    }
 
 }
 bool MainWindow::start_game=false;
@@ -135,36 +140,8 @@ void MainWindow::HideCell(){
 
 void MainWindow::on_Done1_clicked()
 {
-    if (MainWindow::start_game){
-        qDebug()<<"Try start game";
-        if(RulesWindow::num_players == 2)
-        {
-        p1_= new Player();
-        p2_= new Player();
-        }
-        else if (RulesWindow::num_players == 1)
-        {
-            p3_=new AI();
-            p2_= new Player();
-        }
-        MainWindow::start_game=false;
-
-
-    }
-
-    ishidden1=true;
-    int t=0;
-    if(RulesWindow::num_players == 2){
-        p1_->Player::set_turn(1);
-        t =  p1_->get_turns();
-    }
-    else{
-        p3_->AI::set_turn(1);
-        t = p3_->get_turns();
-    }
-    ui->turn_1->setText("Turns: "+QString::number(t));
-    this->update();
     HideCell();
+    ishidden1=true;
     ui->Done1->setEnabled(false);
 }
 
@@ -204,6 +181,31 @@ void MainWindow::on_Carrier2_clicked()
 
 void MainWindow::on_Done2_clicked()
 {
+    if (MainWindow::start_game){
+        qDebug()<<"Try start game";
+        if(RulesWindow::num_players == 2)
+        {
+        p1_= new Player();
+        p2_= new Player();
+        }
+        else if (RulesWindow::num_players == 1)
+        {
+            p3_=new AI();
+            p2_= new Player();
+        }
+        MainWindow::start_game=false;
+    }
+    int t=0;
+    if(RulesWindow::num_players == 2){
+        p1_->Player::set_turn(1);
+        t =  p1_->get_turns();
+    }
+    else{
+        p3_->AI::set_turn(1);
+        t = p3_->get_turns();
+    }
+    ui->turn_1->setText("Turns: "+QString::number(t));
+    this->update();
     ishidden2=true;
     HideCell2();
     ui->Done2->setEnabled(false);
@@ -1171,7 +1173,7 @@ void MainWindow::click()
 
 void MainWindow::score_check(){
     int t;
-    if(Cell::score2 < 5 || Cell::score < 5){
+    if(Cell::score2 < 5 && Cell::score < 5){
         return;
     }
     if(Cell::score2 > Cell::score && !Player::extra_turns && RulesWindow::num_players == 2){
@@ -1193,4 +1195,133 @@ void MainWindow::score_check(){
         Player::extra_turns = true;
     }
     this->update();
+}
+
+void MainWindow::AI_Boats(){
+    Cell * item = new Cell(0, 0, 300/10, 300/10,1);
+
+    int x = rand() % 10;
+    int y = rand() & 10;
+    item = cells[y][x];
+    item->s = SquareType::Boat;
+    //Carrier - vertical 5 squares
+    if(y>=4)
+    {
+       item = cells[y-1][x];
+       item->s = SquareType::Boat;
+       item = cells[y-2][x];
+       item->s = SquareType::Boat;
+       item = cells[y-3][x];
+       item->s = SquareType::Boat;
+       item = cells[y-4][x];
+       item->s = SquareType::Boat;
+    }
+    else
+    {
+        item = cells[y+1][x];
+        item->s = SquareType::Boat;
+        item = cells[y+2][x];
+        item->s = SquareType::Boat;
+        item = cells[y+3][x];
+        item->s = SquareType::Boat;
+        item = cells[y+4][x];
+        item->s = SquareType::Boat;
+    }
+
+    //Submarine - horizontal 3 squares
+    int x2 = rand() % 10 ;
+    int y2 = rand() % 10 ;
+    while(cells[y2][x2]->s == SquareType::Boat)
+    {
+         x2 = rand() % 10 ;
+         y2 = rand() % 10 ;
+
+    }
+    item = cells[y2][x2];
+    item->s = SquareType::Boat;
+    if(x<=2) // left most columns
+    {
+  //if statement if there is already a boat to the right
+       if(cells[y2][x2+1]->s != SquareType::Boat || cells[y2][x2+2]->s != SquareType::Boat){
+           cells[y2][x2+1]->s = SquareType::Boat;
+           cells[y2][x2+2]->s = SquareType::Boat;
+       }
+       else if(y2<=7){
+           cells[y2+1][x2]->s = SquareType::Boat;
+           cells[y2+2][x2]->s = SquareType::Boat;
+       }
+       else{
+           cells[y2-1][x2]->s = SquareType::Boat;
+           cells[y2-2][x2]->s = SquareType::Boat;
+       }
+    }
+    else {
+        //if statement if there is already a boat to the left
+        if(cells[y2][x2-1]->s != SquareType::Boat || cells[y2][x2-2]->s != SquareType::Boat){
+            cells[y2][x2-1]->s = SquareType::Boat;
+            cells[y2][x2-2]->s = SquareType::Boat;
+        }
+        else if(y<=7){
+            cells[y2+1][x2]->s = SquareType::Boat;
+            cells[y2+2][x2]->s = SquareType::Boat;
+        }
+        else{
+            cells[y2-1][x2]->s = SquareType::Boat;
+            cells[y2-2][x2]->s = SquareType::Boat;
+        }
+    }
+    //Uboat - horizontal or vertical 2 squares
+    int x3 = rand() % 10 ;
+    int y3 = rand() % 10 ;
+    while(cells[x3][y3]->s == SquareType::Boat)
+    {
+         x3 = rand() % 10 ;
+         y3 = rand() % 10 ;
+
+    }
+    item = cells[x3][y3];
+    item->s = SquareType::Boat;
+    //check the cell above first
+    if(y>0){
+        //cell above first
+        if(cells[y3-1][x3]->s != SquareType::Boat){
+            cells[y3-1][x3]->s = SquareType::Boat;
+        }
+        else if(y!=9){
+            //cell below
+            if(cells[y3+1][x3]->s != SquareType::Boat){
+                cells[y3+1][x3]->s = SquareType::Boat;
+            }
+        }
+        else if(x!=9){
+            //cell right
+            if(cells[y3][x3+1]->s != SquareType::Boat){
+                cells[y3][x3+1]->s = SquareType::Boat;
+            }
+        }
+        else if(x!=0){
+            //cell left
+            if(cells[y3][x3-1]->s != SquareType::Boat){
+                cells[y3][x3-1]->s = SquareType::Boat;
+            }
+        }
+    }
+    else if(y==0){
+        //cell below
+        if(cells[y3+1][x3]->s != SquareType::Boat){
+            cells[y3+1][x3]->s = SquareType::Boat;
+        }
+        //cell right
+        if(cells[y3][x3+1]->s != SquareType::Boat){
+            cells[y3][x3+1]->s = SquareType::Boat;
+        }
+        //cell left
+        if(cells[y3][x3-1]->s != SquareType::Boat){
+            cells[y3][x3-1]->s = SquareType::Boat;
+        }
+    }
+    HideCell();
+    Cell::is_game1 = true;
+    ishidden1=true;
+    ui->Done1->setEnabled(false);
 }

@@ -145,8 +145,7 @@ public:
     AI(){player_type = 2;turns=0;}
 
     virtual void set_turn(int x){if((x==1 || x==-1) && turns < 2){turns += x;}}
-    Cell *cells2[10][10];
-private:
+signals:
     void make_boat();
     
 //turn count - action count
