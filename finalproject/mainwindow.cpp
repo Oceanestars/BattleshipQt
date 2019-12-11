@@ -1201,34 +1201,24 @@ void MainWindow::score_check(){
 void MainWindow::AI_Boats(){
 
     qDebug()<<"IS AI WORKING???????";
-    Cell * item = new Cell(0, 0, 300/10, 300/10,1);
     ui->label->setText("AI");
     int x = rand() % 10;
     int y = rand() & 10;
-    item = cells[y][x];
-    item->s = SquareType::Boat;
+    cells[y][x]->s = SquareType::Boat;
     //Carrier - vertical 5 squares
     if(y>=4)
     {
-       item = cells[y-1][x];
-       item->s = SquareType::Boat;
-       item = cells[y-2][x];
-       item->s = SquareType::Boat;
-       item = cells[y-3][x];
-       item->s = SquareType::Boat;
-       item = cells[y-4][x];
-       item->s = SquareType::Boat;
+       cells[y-1][x]->s = SquareType::Boat;
+       cells[y-2][x]->s = SquareType::Boat;
+       cells[y-3][x]->s = SquareType::Boat;
+       cells[y-4][x]->s = SquareType::Boat;
     }
     else
     {
-        item = cells[y+1][x];
-        item->s = SquareType::Boat;
-        item = cells[y+2][x];
-        item->s = SquareType::Boat;
-        item = cells[y+3][x];
-        item->s = SquareType::Boat;
-        item = cells[y+4][x];
-        item->s = SquareType::Boat;
+        cells[y+1][x]->s=SquareType::Boat;
+        cells[y+2][x]->s=SquareType::Boat;
+        cells[y+3][x]->s=SquareType::Boat;
+        cells[y+4][x]->s=SquareType::Boat;
     }
 
     //Submarine - horizontal 3 squares
@@ -1240,37 +1230,44 @@ void MainWindow::AI_Boats(){
          y2 = rand() % 10 ;
 
     }
-    item = cells[y2][x2];
-    item->s = SquareType::Boat;
-    if(x<=2) // left most columns
+    cells[y2][x2]->s = SquareType::Boat;
+    qDebug()<<"y2:"<<y2<<"x2:"<<x2;
+    if(x<2) // left most columns
     {
   //if statement if there is already a boat to the right
-       if(cells[y2][x2+1]->s != SquareType::Boat || cells[y2][x2+2]->s != SquareType::Boat){
+       if(cells[y2][x2+1]->s != SquareType::Boat && cells[y2][x2+2]->s != SquareType::Boat){
            cells[y2][x2+1]->s = SquareType::Boat;
            cells[y2][x2+2]->s = SquareType::Boat;
+           qDebug()<<"are we in here?";
+//           qDebug()<<"y22:"<<y2<<"x22:"<<x2;
        }
        else if(y2<=7){
            cells[y2+1][x2]->s = SquareType::Boat;
            cells[y2+2][x2]->s = SquareType::Boat;
+           qDebug()<<"are we in here?22";
        }
        else{
            cells[y2-1][x2]->s = SquareType::Boat;
            cells[y2-2][x2]->s = SquareType::Boat;
+           qDebug()<<"are we in here?3333";
        }
     }
     else {
         //if statement if there is already a boat to the left
-        if(cells[y2][x2-1]->s != SquareType::Boat || cells[y2][x2-2]->s != SquareType::Boat){
+        if(cells[y2][x2-1]->s != SquareType::Boat && cells[y2][x2-2]->s != SquareType::Boat){
             cells[y2][x2-1]->s = SquareType::Boat;
             cells[y2][x2-2]->s = SquareType::Boat;
+            qDebug()<<"are we in here?444";
         }
         else if(y<=7){
             cells[y2+1][x2]->s = SquareType::Boat;
             cells[y2+2][x2]->s = SquareType::Boat;
+            qDebug()<<"are we in here?5555";
         }
         else{
             cells[y2-1][x2]->s = SquareType::Boat;
             cells[y2-2][x2]->s = SquareType::Boat;
+            qDebug()<<"are we in here?6666";
         }
     }
     //Uboat - horizontal or vertical 2 squares
@@ -1282,8 +1279,7 @@ void MainWindow::AI_Boats(){
          y3 = rand() % 10 ;
 
     }
-    item = cells[x3][y3];
-    item->s = SquareType::Boat;
+    cells[x3][y3]->s = SquareType::Boat;
     //check the cell above first
     if(y>0){
         //cell above first
